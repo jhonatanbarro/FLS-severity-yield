@@ -1,0 +1,168 @@
+
+
+
+# Data import 
+
+
+```{r}
+
+library(tidyverse)
+library(metafor)
+library(ggthemes)
+library(cowplot)
+library(scales)
+library(knitr)
+library(broom)
+library(dplyr)
+library(readxl)
+library(gsheet)
+library(janitor)
+
+
+fls_raw <- gsheet2tbl("https://docs.google.com/spreadsheets/d/1tCr1ZCfm9dpWqupwxRJzxFCiMeU5rAT2quTF1sqg_WE/edit?usp=sharing") %>% 
+  group_by(study, brand_name) %>% 
+  mutate(sev = as.numeric(sev),
+         yld = as.numeric(yld)) %>% 
+  mutate(n = n()) #columm with the number of rep
+
+# Tansforming soybean yield from bu/A to kg/ha
+fls_raw <- fls_raw %>% 
+  mutate(yld = yld*67.25) 
+fls_raw
+
+```
+
+
+## Summarrising data (mean and variance)
+
+```{r, warning=FALSE}
+
+fls1 <- fls_raw %>% 
+  filter(study != 23) %>% 
+  filter(study != 27) %>%
+  filter(study != 38) %>%
+  filter(study != 48) %>%
+  group_by(study, year, location, state, cultivar, planting_date, app_date, growth_stage, brand_name, group, active_ingred,n) %>% 
+  summarise(mean_sev = mean(sev),
+            mean_yld = mean(yld))
+
+
+fls2_sev <- fls_raw %>% 
+  filter(study != 23) %>% 
+  filter(study != 27) %>% 
+  filter(study != 38) %>%
+  filter(study != 48) %>%
+  filter(sev>0) %>% 
+  group_by(study, year) %>%  
+  select(active_ingred, rep, sev) %>%
+  group_by(study, year) %>% 
+  do(tidy(aov(.$sev ~ .$active_ingred + factor(.$rep)))) %>% 
+  filter(term == "Residuals") %>% 
+  select(1,2,6) %>% 
+  set_names("study", "year", "v_sev")
+
+
+
+fls2_yld <- fls_raw %>% 
+  filter(study != 23) %>% 
+  filter(study != 27) %>%
+  filter(study != 38) %>%
+  filter(study != 48) %>%
+  group_by(study, year) %>%  
+  select(active_ingred, rep, yld) %>% 
+  group_by(study, year) %>% 
+  do(tidy(aov(.$yld ~ .$active_ingred + factor(.$rep)))) %>% 
+  filter(term == "Residuals") %>% 
+  select(1,2,6) %>% 
+  set_names("study", "year", "v_yld")
+
+
+qmr = left_join(fls2_sev, fls2_yld)
+
+fls_trial = full_join(fls1, qmr)
+fls_trial
+```
+
+
+### Variance of studies 23, 27, 38 and 48 (Only means)
+
+```{r}
+fls23 = fls_raw %>% 
+  filter(study == 23) %>% 
+  group_by(study, year, location, state) %>% 
+  summarise(mean_sev = mean(sev),
+            mean_yld = mean(yld)) %>% 
+  mutate(v_sev = ((21.48/100)*mean_sev)^2,
+         v_yld = ((5.95/100)*mean_yld)^2)
+fls23  
+  
+fls27 = fls_raw %>% 
+  filter(study == 27) %>% 
+  group_by(study, year, location, state) %>% 
+  summarise(mean_sev = mean(sev),
+            mean_yld = mean(yld)) %>% 
+  mutate(v_sev = ((21.01/100)*mean_sev)^2,
+         v_yld = ((8.94/100)*mean_yld)^2)
+fls27   
+
+fls38 = fls_raw %>% 
+  filter(study == 38) %>% 
+  group_by(study, year, location, state) %>% 
+  summarise(mean_sev = mean(sev),
+            mean_yld = mean(yld)) %>% 
+  mutate(v_sev = ((0/100)*mean_sev)^2,
+         v_yld = ((8.59/100)*mean_yld)^2)
+fls38 
+
+
+fls48 = fls_raw %>% 
+  filter(study == 48) %>% 
+  group_by(study, year, location, state) %>% 
+  summarise(mean_sev = mean(sev),
+            mean_yld = mean(yld)) %>% 
+  mutate(v_sev = ((0/100)*mean_sev)^2,
+         v_yld = ((11/100)*mean_yld)^2)
+fls48 
+  
+fls3 = rbind(fls23, fls27, fls38, fls48) %>% 
+  select(1:4,7:8)
+
+fls_cv = fls_raw %>% 
+  filter(study %in% c(23,27,38,48)) %>%
+  mutate(n = n*4) %>% 
+  full_join(fls3) %>% 
+  #select(-c(12,13,16)) %>% 
+  mutate(mean_sev = sev, mean_yld = yld) %>% 
+  select(-c(sev, yld))
+fls_cv  
+  
+```
+
+### All data
+
+```{r}
+
+fls = full_join(fls_trial, fls_cv)
+fls
+```
+
+
+### Check columns
+
+```{r}
+# these two columns will be used as moderator variables later
+fls_check = fls %>% 
+  ungroup() %>% 
+  filter(brand_name == "check")  %>% 
+  mutate(check = brand_name, sev_check = mean_sev, v_sev_check = v_sev, yld_check = mean_yld, v_yld_check = v_yld ) %>% 
+  select(study, yld_check, v_yld_check, sev_check, v_sev_check)
+
+fls_data = fls %>% 
+  full_join(fls_check)
+
+
+library(readr)
+write_csv(fls_data, "fls_data.csv")
+```
+
+

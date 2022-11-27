@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>plots.utf8</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cerulean.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">FLS severity-yield relationship</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="fa fa fa fa-home"></span>
+     
+    About
+  </a>
+</li>
+<li>
+  <a href="data.html">
+    <span class="fa fa fa fa-table"></span>
+     
+    Data
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="fa fa fa fa-file-code-o"></span>
+     
+    Documented analysis
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="code.html">Code</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="plots.html">
+    <span class="fas fa-bar-chart"></span>
+     
+    Plots
+  </a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+<div class="btn-group pull-right">
+<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+
+</div>
+
+
+<div id="data-import" class="section level1">
+<h1>Data import</h1>
+<pre class="r"><code>library(tidyverse)
+library(metafor)
+library(ggthemes)
+library(cowplot)
+library(scales)
+library(knitr)
+library(broom)
+library(dplyr)
+library(readxl)
+library(gsheet)
+library(janitor)
+library(ggforce)
+
+fls_dat &lt;- read_csv(&quot;fls_data.csv&quot;) %&gt;% 
+  filter(mean_yld != &quot;NA&quot;) %&gt;% 
+  filter(mean_sev != &quot;NA&quot;) %&gt;% 
+  filter(study!= 60) %&gt;% 
+  group_by(study) %&gt;% 
+  mutate(difer = max(mean_sev) - min(mean_sev)) %&gt;% 
+  filter(difer&gt;5) #selecting studies with more than 5% difference in disease severity across treatments</code></pre>
+<pre><code>## 
+## -- Column specification -----------------------------------------------------------------------
+## cols(
+##   .default = col_double(),
+##   location = col_character(),
+##   state = col_character(),
+##   cultivar = col_character(),
+##   planting_date = col_character(),
+##   app_date = col_character(),
+##   growth_stage = col_character(),
+##   brand_name = col_character(),
+##   group = col_character(),
+##   active_ingred = col_character(),
+##   rating_disease = col_character()
+## )
+## i Use `spec()` for the full column specifications.</code></pre>
+<pre class="r"><code>head(fls_dat)</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["study"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["year"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["location"],"name":[3],"type":["chr"],"align":["left"]},{"label":["state"],"name":[4],"type":["chr"],"align":["left"]},{"label":["cultivar"],"name":[5],"type":["chr"],"align":["left"]},{"label":["planting_date"],"name":[6],"type":["chr"],"align":["left"]},{"label":["app_date"],"name":[7],"type":["chr"],"align":["left"]},{"label":["growth_stage"],"name":[8],"type":["chr"],"align":["left"]},{"label":["brand_name"],"name":[9],"type":["chr"],"align":["left"]},{"label":["group"],"name":[10],"type":["chr"],"align":["left"]},{"label":["active_ingred"],"name":[11],"type":["chr"],"align":["left"]},{"label":["n"],"name":[12],"type":["dbl"],"align":["right"]},{"label":["mean_sev"],"name":[13],"type":["dbl"],"align":["right"]},{"label":["mean_yld"],"name":[14],"type":["dbl"],"align":["right"]},{"label":["v_sev"],"name":[15],"type":["dbl"],"align":["right"]},{"label":["v_yld"],"name":[16],"type":["dbl"],"align":["right"]},{"label":["rep"],"name":[17],"type":["dbl"],"align":["right"]},{"label":["rating_disease"],"name":[18],"type":["chr"],"align":["left"]},{"label":["yld_check"],"name":[19],"type":["dbl"],"align":["right"]},{"label":["v_yld_check"],"name":[20],"type":["dbl"],"align":["right"]},{"label":["sev_check"],"name":[21],"type":["dbl"],"align":["right"]},{"label":["v_sev_check"],"name":[22],"type":["dbl"],"align":["right"]},{"label":["difer"],"name":[23],"type":["dbl"],"align":["right"]}],"data":[{"1":"1","2":"2015","3":"TVREC","4":"Alabama","5":"NA","6":"NA","7":"NA","8":"R3","9":"Affiance","10":"QoI+DMI","11":"azoxystrobin+tetraconazole","12":"4","13":"29.75","14":"4912.613","15":"178.9804","16":"39232.89","17":"NA","18":"NA","19":"4747.85","20":"39232.89","21":"45.5","22":"178.9804","23":"40.5"},{"1":"1","2":"2015","3":"TVREC","4":"Alabama","5":"NA","6":"NA","7":"NA","8":"R3","9":"check","10":"check","11":"check","12":"4","13":"45.50","14":"4747.850","15":"178.9804","16":"39232.89","17":"NA","18":"NA","19":"4747.85","20":"39232.89","21":"45.5","22":"178.9804","23":"40.5"},{"1":"1","2":"2015","3":"TVREC","4":"Alabama","5":"NA","6":"NA","7":"NA","8":"R3","9":"Domark","10":"DMI","11":"tetraconazol","12":"4","13":"8.25","14":"5127.812","15":"178.9804","16":"39232.89","17":"NA","18":"NA","19":"4747.85","20":"39232.89","21":"45.5","22":"178.9804","23":"40.5"},{"1":"1","2":"2015","3":"TVREC","4":"Alabama","5":"NA","6":"NA","7":"NA","8":"R3","9":"Fortix","10":"QoI+DMI","11":"fluoxastrobin+flutriafol","12":"4","13":"11.50","14":"4934.469","15":"178.9804","16":"39232.89","17":"NA","18":"NA","19":"4747.85","20":"39232.89","21":"45.5","22":"178.9804","23":"40.5"},{"1":"1","2":"2015","3":"TVREC","4":"Alabama","5":"NA","6":"NA","7":"NA","8":"R3","9":"Headline","10":"QoI","11":"pyraclostrobin","12":"4","13":"39.25","14":"4976.500","15":"178.9804","16":"39232.89","17":"NA","18":"NA","19":"4747.85","20":"39232.89","21":"45.5","22":"178.9804","23":"40.5"},{"1":"1","2":"2015","3":"TVREC","4":"Alabama","5":"NA","6":"NA","7":"NA","8":"R3","9":"Headline+Topguard","10":"QoI+DMI","11":"pyraclostrobin+flutriafol","12":"4","13":"5.00","14":"5173.206","15":"178.9804","16":"39232.89","17":"NA","18":"NA","19":"4747.85","20":"39232.89","21":"45.5","22":"178.9804","23":"40.5"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<pre class="r"><code>length(unique(fls_dat$study))</code></pre>
+<pre><code>## [1] 39</code></pre>
+</div>
+<div id="data-visualization" class="section level1">
+<h1>Data visualization</h1>
+<div id="histograms" class="section level2">
+<h2>Histograms</h2>
+<p>The histograms below summarize the distribution of the two variables: FLS severity and soybean yield.</p>
+<pre class="r"><code>hist_sev &lt;- ggplot(fls_dat, aes(mean_sev)) + 
+  geom_histogram(bin = 1, binwidth = 4.2, color = &quot;black&quot; , fill = &quot;black&quot;,
+                 alpha = 0.1) + 
+  geom_vline(xintercept = 19.46,
+             size = 1.2,
+             linetype = 2)+
+  scale_x_continuous(breaks = c(0, 25,50,75,100), limits = c(0, 100)) +
+  theme_half_open()+
+  theme(axis.title = element_text(size=12),
+        axis.text = element_text(size=12))+
+  labs(x = &quot;FLS severity (%)&quot;, y = &quot;Frequency&quot;)
+  
+hist_yld &lt;- ggplot(fls_dat, aes(mean_yld)) + 
+  geom_histogram(bin = 1, binwidth = 200, color = &quot;black&quot; , fill = &quot;black&quot;,
+                 alpha = 0.1) + 
+  geom_vline(xintercept = 3327,
+             size = 1.2,
+             linetype = 2)+
+  scale_y_continuous(breaks = c(0,20,40,60), limits = c(0, 60)) +
+  theme_half_open()+
+  theme(axis.title = element_text(size=12),
+        axis.text = element_text(size=12))+
+  labs(x = &quot;Yield (kg/ha)&quot;, y = &quot;Frequency&quot;)
+
+library(patchwork)
+(hist_sev + hist_yld) +
+  plot_layout(nrow = 1)+
+  plot_annotation(tag_levels = &quot;A&quot;)</code></pre>
+<p><img src="plots_files/figure-html/unnamed-chunk-2-1.png" width="1152" /></p>
+<pre class="r"><code>ggsave(&quot;Figures/histograms.png&quot;, height=3, width=8, dpi = 600, bg = &quot;white&quot;)</code></pre>
+</div>
+<div id="ordinary-regressions" class="section level2">
+<h2>Ordinary Regressions</h2>
+<p>Ordinary regression for each study.</p>
+<pre class="r"><code>ggplot(fls_dat, aes(mean_sev, mean_yld))+
+       geom_point(shape = 1)+
+       stat_smooth(method = lm, fullrange=TRUE, se = F, col = &quot;black&quot;)+
+       ylab(&quot;Yield (kg/ha)&quot;)+
+       xlab(&quot;FLS Severity (%)&quot;)+
+        ylim(0,6000)+
+      theme_half_open()+
+      theme(axis.title = element_text(size=12),
+        axis.text = element_text(size=12))+
+       facet_wrap(~ study, ncol = 5, scales = &quot;fixed&quot;)</code></pre>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<p><img src="plots_files/figure-html/unnamed-chunk-3-1.png" width="1152" /></p>
+<pre class="r"><code>ggsave(&quot;Figures/grid_lines.png&quot;, height=12, width=12, dpi = 600, bg = &quot;white&quot;)</code></pre>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<pre class="r"><code>lines_kg = ggplot(fls_dat, aes(mean_sev, mean_yld))+
+      geom_smooth(method=&quot;lm&quot;, fullrange= T, se=F, size=0.7, color=&quot;grey80&quot;, aes(group = factor(study)))+
+     # geom_point(alpha = 0.5, shape = 1)+
+      ylab(&quot;Yield (kg/ha)&quot;)+
+      xlab(&quot;FLS Severity (%)&quot;)+
+      ylim(0,6000)+
+      xlim(0,100)+
+      theme_half_open()+
+      theme(axis.title = element_text(size=12),
+        axis.text = element_text(size=12))
+lines_kg</code></pre>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<pre><code>## Warning: Removed 178 rows containing missing values (geom_smooth).</code></pre>
+<p><img src="plots_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+</div>
+<div id="regression-coefficients" class="section level2">
+<h2>Regression coefficients</h2>
+<pre class="r"><code>reg_dc = fls_dat %&gt;% 
+  group_by(study, year) %&gt;% 
+  summarise(intercept = lm(mean_yld~mean_sev)$coefficients[1],
+            slope = lm(mean_yld~mean_sev)$coefficients[2],
+            r2 = summary(lm(mean_yld~mean_sev))$r.squared,
+            sigma = summary(lm(mean_yld~mean_sev))$sigma) %&gt;%
+  mutate(Dc = (slope/intercept)*100) %&gt;% 
+  filter(Dc&lt;0.5)</code></pre>
+<pre><code>## `summarise()` has grouped output by &#39;study&#39;. You can override using the `.groups` argument.</code></pre>
+<pre class="r"><code>reg_dc</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["study"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["year"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["intercept"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["slope"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["r2"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["sigma"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["Dc"],"name":[7],"type":["dbl"],"align":["right"]}],"data":[{"1":"1","2":"2015","3":"5115.940","4":"-4.583522","5":"0.2035648662","6":"129.72097","7":"-0.08959295"},{"1":"2","2":"2015","3":"3499.480","4":"-36.340899","5":"0.1488412359","6":"260.81355","7":"-1.03846566"},{"1":"3","2":"2015","3":"3404.949","4":"-30.403696","5":"0.7754153340","6":"172.13988","7":"-0.89292661"},{"1":"4","2":"2015","3":"3920.119","4":"-10.862343","5":"0.3267452311","6":"153.99190","7":"-0.27709215"},{"1":"6","2":"2015","3":"4581.594","4":"-39.082543","5":"0.8632618341","6":"158.36605","7":"-0.85303373"},{"1":"7","2":"2015","3":"3418.716","4":"-9.169389","5":"0.5445255837","6":"153.96994","7":"-0.26821146"},{"1":"8","2":"2015","3":"4018.884","4":"-9.655937","5":"0.4796645745","6":"199.03325","7":"-0.24026413"},{"1":"9","2":"2015","3":"1590.751","4":"-26.393206","5":"0.2993228785","6":"81.28832","7":"-1.65916598"},{"1":"10","2":"2015","3":"3943.932","4":"-12.969643","5":"0.1015202507","6":"114.13264","7":"-0.32885055"},{"1":"11","2":"2015","3":"4291.068","4":"-13.043722","5":"0.0319052657","6":"175.15027","7":"-0.30397381"},{"1":"12","2":"2015","3":"3537.967","4":"-22.484868","5":"0.8712738187","6":"106.44472","7":"-0.63553077"},{"1":"13","2":"2016","3":"1702.820","4":"-23.068684","5":"0.3990718791","6":"74.61055","7":"-1.35473420"},{"1":"14","2":"2016","3":"3993.567","4":"-68.613176","5":"0.4853083457","6":"151.95958","7":"-1.71809250"},{"1":"15","2":"2016","3":"5119.088","4":"-31.991023","5":"0.6278495530","6":"132.96293","7":"-0.62493598"},{"1":"16","2":"2016","3":"4796.356","4":"-15.644688","5":"0.5309879012","6":"132.27331","7":"-0.32617859"},{"1":"17","2":"2016","3":"5024.309","4":"-35.040546","5":"0.6315368392","6":"237.42275","7":"-0.69742025"},{"1":"19","2":"2016","3":"3555.623","4":"-67.227550","5":"0.5190601857","6":"146.38746","7":"-1.89073886"},{"1":"20","2":"2016","3":"4397.750","4":"-0.900373","5":"0.0008602988","6":"321.38068","7":"-0.02047349"},{"1":"21","2":"2016","3":"3946.606","4":"-49.385236","5":"0.5733327021","6":"108.41128","7":"-1.25133424"},{"1":"22","2":"2016","3":"2138.146","4":"1.504067","5":"0.0004343239","6":"113.11842","7":"0.07034446"},{"1":"24","2":"2017","3":"2987.788","4":"-30.018728","5":"0.8847282949","6":"123.13446","7":"-1.00471419"},{"1":"25","2":"2017","3":"3006.209","4":"-13.378582","5":"0.5710996529","6":"130.16079","7":"-0.44503171"},{"1":"29","2":"2018","3":"4182.094","4":"-46.089720","5":"0.6044740056","6":"381.66739","7":"-1.10207288"},{"1":"30","2":"2018","3":"2395.523","4":"-19.002579","5":"0.4357018734","6":"161.18641","7":"-0.79325375"},{"1":"32","2":"2019","3":"4355.491","4":"-6.320070","5":"0.2040613018","6":"102.25098","7":"-0.14510581"},{"1":"33","2":"2019","3":"2847.040","4":"-6.609824","5":"0.0137039980","6":"351.84639","7":"-0.23216474"},{"1":"35","2":"2017","3":"3827.047","4":"-15.569116","5":"0.5012930930","6":"119.39554","7":"-0.40681804"},{"1":"37","2":"2019","3":"1281.892","4":"2.769752","5":"0.0074668826","6":"51.15489","7":"0.21606745"},{"1":"39","2":"2019","3":"5067.105","4":"-12.316682","5":"0.1897576003","6":"166.97103","7":"-0.24307139"},{"1":"40","2":"2019","3":"4191.461","4":"-16.327730","5":"0.0243656018","6":"258.54861","7":"-0.38954747"},{"1":"41","2":"2019","3":"2912.928","4":"-12.377793","5":"0.0233716498","6":"258.30427","7":"-0.42492616"},{"1":"52","2":"2020","3":"5073.607","4":"-10.514441","5":"0.1916276901","6":"118.54242","7":"-0.20723799"},{"1":"54","2":"2020","3":"4863.148","4":"-32.488490","5":"0.4071934647","6":"290.39163","7":"-0.66805477"},{"1":"59","2":"2020","3":"3039.620","4":"-44.406280","5":"0.5908994723","6":"128.51483","7":"-1.46091568"},{"1":"61","2":"2012","3":"4810.527","4":"-22.826913","5":"0.7515767712","6":"193.43357","7":"-0.47452002"},{"1":"62","2":"2013","3":"4275.564","4":"-23.443179","5":"0.5819209009","6":"245.45910","7":"-0.54830613"},{"1":"63","2":"2014","3":"2566.315","4":"6.788910","5":"0.0075026028","6":"442.19086","7":"0.26453926"},{"1":"64","2":"2021","3":"4876.249","4":"-13.334929","5":"0.0220824646","6":"270.65541","7":"-0.27346693"},{"1":"66","2":"2021","3":"3348.944","4":"-16.214184","5":"0.0190914187","6":"289.83044","7":"-0.48415817"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<pre class="r"><code>summary(reg_dc$intercept)</code></pre>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##    1282    3023    3944    3741    4490    5119</code></pre>
+<pre class="r"><code>summary(reg_dc$slope)</code></pre>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+## -68.613 -31.197 -16.214 -21.462 -10.688   6.789</code></pre>
+<div id="distribution-of-intercepts-and-slopes" class="section level3">
+<h3>Distribution of intercepts and slopes</h3>
+<pre class="r"><code>int = reg_dc %&gt;% 
+  ggplot(aes(intercept))+
+  geom_histogram(color = &quot;black&quot; , fill = &quot;black&quot;,
+                 alpha = 0.1, bins = 15) + 
+  theme_half_open()+
+  labs(y = &quot;Frequency&quot;, x = &quot;Intercept&quot;)+
+    theme(axis.title = element_text(size=12),
+        axis.text = element_text(size=12))
+
+
+slope = reg_dc %&gt;% 
+  ggplot(aes(slope))+
+geom_histogram(color = &quot;black&quot; , fill = &quot;black&quot;,
+                 alpha = 0.1, bins = 15) +   theme_half_open()+
+  labs(y = &quot;Frequency&quot;, x = &quot;Slope&quot;)+
+    theme(axis.title = element_text(size=12),
+        axis.text = element_text(size=12))</code></pre>
+</div>
+</div>
+<div id="population-average-regression" class="section level2">
+<h2>Population-average regression</h2>
+<p>Using intercepts and slopes with respective 95% CI.</p>
+<pre class="r"><code>geral = fls_dat %&gt;% 
+ggplot(aes(mean_sev, mean_yld))+
+      geom_smooth(method=&quot;lm&quot;, fullrange= T, se=F, size=0.7, color=&quot;grey80&quot;, aes(group = factor(study)))+
+      ylab(&quot;Yield (kg/ha)&quot;)+
+      xlab(&quot;FLS Severity (%)&quot;)+
+  ylim(0,6000)+
+  xlim(0,100) +
+  theme_half_open()+
+  geom_abline(aes(intercept = 3719.91, slope = -19.08), size = 1.3, linetype = &quot;solid&quot;) +
+  geom_abline(aes(intercept = 3395.91, slope = -23.96), size = 1.0, linetype = &quot;dashed&quot;) +
+  geom_abline(aes(intercept = 4045.61, slope = -14.22), size = 1.0, linetype = &quot;dashed&quot;)+
+  theme(axis.title = element_text(size=12),
+        axis.title.y = element_blank(),
+        axis.text = element_text(size=12))
+geral</code></pre>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<pre><code>## Warning: Removed 178 rows containing missing values (geom_smooth).</code></pre>
+<p><img src="plots_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<pre class="r"><code>library(patchwork)
+(lines_kg + geral)/(int + slope) +
+  plot_layout(nrow = 2)+
+  plot_annotation(tag_levels = &quot;A&quot;)</code></pre>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<pre><code>## Warning: Removed 178 rows containing missing values (geom_smooth).</code></pre>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<pre><code>## Warning: Removed 178 rows containing missing values (geom_smooth).</code></pre>
+<p><img src="plots_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<pre class="r"><code>ggsave(&quot;Figures/coefficients.png&quot;, height=10, width=10, dpi = 600, bg = &quot;white&quot;)</code></pre>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<pre><code>## Warning: Removed 178 rows containing missing values (geom_smooth).</code></pre>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<pre><code>## Warning: Removed 178 rows containing missing values (geom_smooth).</code></pre>
+<div id="yield-class-effect-on-intercepts" class="section level3">
+<h3>Yield class effect on Intercepts</h3>
+<p>High Yield</p>
+<pre class="r"><code>high &lt;- ggplot(fls_dat, aes(mean_sev, mean_yld)) +
+  geom_smooth(method=&quot;lm&quot;, fullrange= T, se=F, size=0.7, color=&quot;grey90&quot;, aes(group = factor(study)))+
+  ylim(0, 6000) +
+  xlim(0, 100) +
+  labs(title = &quot;Baseline yield: High&quot;,
+    x = &quot;FLS Severity (%)&quot;,
+    y = &quot;Soybean yield (kg/ha)&quot;) +
+  theme_half_open() +
+  geom_abline(aes(intercept = 3842.69, slope = -16.20), size = 1.5, linetype = &quot;solid&quot;) +
+  geom_abline(aes(intercept = 3557.12, slope = -21.45), size = 1.5, linetype = &quot;dashed&quot;) +
+  geom_abline(aes(intercept = 4126.21, slope = -10.81), size = 1.5, linetype = &quot;dashed&quot;)+
+  theme(axis.title = element_text(size=12),
+        axis.text = element_text(size=12),
+        plot.title = element_text(hjust = 0.5))
+high</code></pre>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<pre><code>## Warning: Removed 178 rows containing missing values (geom_smooth).</code></pre>
+<p><img src="plots_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p>Low yield</p>
+<pre class="r"><code>low &lt;- ggplot(fls_dat, aes(mean_sev, mean_yld)) +
+  geom_smooth(method=&quot;lm&quot;, fullrange= T, se=F, size=0.7, color=&quot;grey90&quot;, aes(group = factor(study)))+
+  ylim(0, 6000) +
+  xlim(0, 100) +
+  labs(title = &quot;Baseline yield: Low&quot;,
+    x = &quot;FLS Severity (%)&quot;,
+    y = &quot;Soybean yield (kg/ha)&quot;) +
+  theme_half_open() +
+  geom_abline(aes(intercept = 3455.11, slope = -14.38), size = 1.5, linetype = &quot;solid&quot;) +
+  geom_abline(aes(intercept = 3060.12, slope = -23.29), size = 1.5, linetype = &quot;dashed&quot;) +
+  geom_abline(aes(intercept = 3847.69, slope = -5.3), size = 1.5, linetype = &quot;dashed&quot;)+
+  theme(axis.title = element_text(size=12),
+        axis.title.y = element_blank(),
+        axis.text = element_text(size=12),
+        plot.title = element_text(hjust = 0.5))
+low</code></pre>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<pre><code>## Warning: Removed 178 rows containing missing values (geom_smooth).</code></pre>
+<p><img src="plots_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<pre class="r"><code>library(patchwork)
+(high + low) +
+  plot_layout(nrow = 1)+
+  plot_annotation(tag_levels = &quot;A&quot;)</code></pre>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<pre><code>## Warning: Removed 178 rows containing missing values (geom_smooth).</code></pre>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<pre><code>## Warning: Removed 178 rows containing missing values (geom_smooth).</code></pre>
+<p><img src="plots_files/figure-html/unnamed-chunk-11-1.png" width="768" /></p>
+<pre class="r"><code>ggsave(&quot;Figures/baseline_yld.png&quot;, height=4, width=8, dpi = 600, bg = &quot;white&quot;)</code></pre>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<pre><code>## Warning: Removed 178 rows containing missing values (geom_smooth).</code></pre>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<pre><code>## Warning: Removed 178 rows containing missing values (geom_smooth).</code></pre>
+</div>
+</div>
+<div id="economic-threshold" class="section level2">
+<h2>Economic Threshold</h2>
+<pre class="r"><code>cost = seq(30, 80,length.out = 200)
+lambda = c(0.25, 0.50, 0.75)
+soybean = seq(200, 700,length.out = 200)
+a = 0.0051</code></pre>
+<pre class="r"><code>economic = expand.grid(cost = cost,soybean = soybean, lambda = lambda, a = a) %&gt;% 
+  mutate(econ_tresh = ((cost/(soybean*a))*lambda)) %&gt;% 
+  mutate(lambda = paste0(lambda,&quot;% of Control&quot;)) </code></pre>
+<pre class="r"><code>surface = economic %&gt;% 
+  mutate(efficacy = case_when(lambda == &quot;0.25% of Control&quot; ~ &quot;25% of Control&quot;,
+                              lambda == &quot;0.5% of Control&quot; ~ &quot;50% of Control&quot;,
+                              lambda == &quot;0.75% of Control&quot; ~ &quot;75% of Control&quot;)) %&gt;% 
+  ggplot(aes(cost, soybean, fill = econ_tresh))+ 
+  geom_raster(alpha = 0.85)+
+  scale_fill_viridis_b(option = &quot;B&quot;, 
+                       guide = guide_colorbar(barwidth = 15, barheight = 0.3),
+                       breaks = seq(0, 60, by =5)
+                       )+
+  facet_grid(~efficacy)+
+  theme_minimal_grid()+
+  labs(y = &quot;Soybean price (USD/metric ton)&quot;,
+       x = &quot;Cost (USD/ha)&quot;,
+       fill =&quot;Economic Damage Threshold (%)&quot; )+
+  theme(legend.position = &quot;top&quot;,
+        legend.justification = 0.5)
+surface</code></pre>
+<p><img src="plots_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<pre class="r"><code>ggsave(&quot;Figures/EDT.png&quot;, height=4, width=8, dpi = 600, bg = &quot;white&quot;)</code></pre>
+</div>
+</div>
+
+
+
+Copyright 2017 Emerson Del Ponte
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = false;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

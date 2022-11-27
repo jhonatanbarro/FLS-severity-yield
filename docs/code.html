@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>code.utf8</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cerulean.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">FLS severity-yield relationship</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="fa fa fa fa-home"></span>
+     
+    About
+  </a>
+</li>
+<li>
+  <a href="data.html">
+    <span class="fa fa fa fa-table"></span>
+     
+    Data
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="fa fa fa fa-file-code-o"></span>
+     
+    Documented analysis
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="code.html">Code</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="plots.html">
+    <span class="fas fa-bar-chart"></span>
+     
+    Plots
+  </a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+<div class="btn-group pull-right">
+<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+
+</div>
+
+
+<div id="data-import" class="section level1">
+<h1>Data import</h1>
+<pre class="r"><code>library(tidyverse)
+library(metafor)
+library(ggthemes)
+library(cowplot)
+library(scales)
+library(knitr)
+library(broom)
+library(dplyr)
+library(readxl)
+library(gsheet)
+library(janitor)
+library(ggforce)
+
+fls_dat &lt;- read_csv(&quot;fls_data.csv&quot;) %&gt;% 
+  filter(mean_yld != &quot;NA&quot;) %&gt;% 
+  filter(mean_sev != &quot;NA&quot;) %&gt;% 
+  filter(study!= 60) %&gt;% 
+  group_by(study) %&gt;% 
+  mutate(difer = max(mean_sev) - min(mean_sev)) %&gt;% 
+  filter(difer&gt;5) #selecting studies with more than 5% difference in disease severity across treatments</code></pre>
+<pre><code>## 
+## -- Column specification -----------------------------------------------------------------------
+## cols(
+##   .default = col_double(),
+##   location = col_character(),
+##   state = col_character(),
+##   cultivar = col_character(),
+##   planting_date = col_character(),
+##   app_date = col_character(),
+##   growth_stage = col_character(),
+##   brand_name = col_character(),
+##   group = col_character(),
+##   active_ingred = col_character(),
+##   rating_disease = col_character()
+## )
+## i Use `spec()` for the full column specifications.</code></pre>
+<pre class="r"><code>head(fls_dat)</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["study"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["year"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["location"],"name":[3],"type":["chr"],"align":["left"]},{"label":["state"],"name":[4],"type":["chr"],"align":["left"]},{"label":["cultivar"],"name":[5],"type":["chr"],"align":["left"]},{"label":["planting_date"],"name":[6],"type":["chr"],"align":["left"]},{"label":["app_date"],"name":[7],"type":["chr"],"align":["left"]},{"label":["growth_stage"],"name":[8],"type":["chr"],"align":["left"]},{"label":["brand_name"],"name":[9],"type":["chr"],"align":["left"]},{"label":["group"],"name":[10],"type":["chr"],"align":["left"]},{"label":["active_ingred"],"name":[11],"type":["chr"],"align":["left"]},{"label":["n"],"name":[12],"type":["dbl"],"align":["right"]},{"label":["mean_sev"],"name":[13],"type":["dbl"],"align":["right"]},{"label":["mean_yld"],"name":[14],"type":["dbl"],"align":["right"]},{"label":["v_sev"],"name":[15],"type":["dbl"],"align":["right"]},{"label":["v_yld"],"name":[16],"type":["dbl"],"align":["right"]},{"label":["rep"],"name":[17],"type":["dbl"],"align":["right"]},{"label":["rating_disease"],"name":[18],"type":["chr"],"align":["left"]},{"label":["yld_check"],"name":[19],"type":["dbl"],"align":["right"]},{"label":["v_yld_check"],"name":[20],"type":["dbl"],"align":["right"]},{"label":["sev_check"],"name":[21],"type":["dbl"],"align":["right"]},{"label":["v_sev_check"],"name":[22],"type":["dbl"],"align":["right"]},{"label":["difer"],"name":[23],"type":["dbl"],"align":["right"]}],"data":[{"1":"1","2":"2015","3":"TVREC","4":"Alabama","5":"NA","6":"NA","7":"NA","8":"R3","9":"Affiance","10":"QoI+DMI","11":"azoxystrobin+tetraconazole","12":"4","13":"29.75","14":"4912.613","15":"178.9804","16":"39232.89","17":"NA","18":"NA","19":"4747.85","20":"39232.89","21":"45.5","22":"178.9804","23":"40.5"},{"1":"1","2":"2015","3":"TVREC","4":"Alabama","5":"NA","6":"NA","7":"NA","8":"R3","9":"check","10":"check","11":"check","12":"4","13":"45.50","14":"4747.850","15":"178.9804","16":"39232.89","17":"NA","18":"NA","19":"4747.85","20":"39232.89","21":"45.5","22":"178.9804","23":"40.5"},{"1":"1","2":"2015","3":"TVREC","4":"Alabama","5":"NA","6":"NA","7":"NA","8":"R3","9":"Domark","10":"DMI","11":"tetraconazol","12":"4","13":"8.25","14":"5127.812","15":"178.9804","16":"39232.89","17":"NA","18":"NA","19":"4747.85","20":"39232.89","21":"45.5","22":"178.9804","23":"40.5"},{"1":"1","2":"2015","3":"TVREC","4":"Alabama","5":"NA","6":"NA","7":"NA","8":"R3","9":"Fortix","10":"QoI+DMI","11":"fluoxastrobin+flutriafol","12":"4","13":"11.50","14":"4934.469","15":"178.9804","16":"39232.89","17":"NA","18":"NA","19":"4747.85","20":"39232.89","21":"45.5","22":"178.9804","23":"40.5"},{"1":"1","2":"2015","3":"TVREC","4":"Alabama","5":"NA","6":"NA","7":"NA","8":"R3","9":"Headline","10":"QoI","11":"pyraclostrobin","12":"4","13":"39.25","14":"4976.500","15":"178.9804","16":"39232.89","17":"NA","18":"NA","19":"4747.85","20":"39232.89","21":"45.5","22":"178.9804","23":"40.5"},{"1":"1","2":"2015","3":"TVREC","4":"Alabama","5":"NA","6":"NA","7":"NA","8":"R3","9":"Headline+Topguard","10":"QoI+DMI","11":"pyraclostrobin+flutriafol","12":"4","13":"5.00","14":"5173.206","15":"178.9804","16":"39232.89","17":"NA","18":"NA","19":"4747.85","20":"39232.89","21":"45.5","22":"178.9804","23":"40.5"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<pre class="r"><code>length(unique(fls_dat$study))</code></pre>
+<pre><code>## [1] 39</code></pre>
+<div id="creating-moderators" class="section level2">
+<h2>Creating moderators</h2>
+<div id="yield-class" class="section level3">
+<h3>yield class</h3>
+<p>Here we will group the yield data into two production situations, low or high yield, based on median of yields across trials.</p>
+<pre class="r"><code>summary(fls_dat$mean_yld)</code></pre>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##    1175    2697    3352    3355    4082    5309</code></pre>
+<pre class="r"><code>fls_dat &lt;- fls_dat %&gt;%
+  mutate(yield_class = case_when(mean_yld &lt;= 3352 ~ &quot;Low&quot;,
+                         mean_yld &gt; 3352 ~ &quot;High&quot;))
+
+a1 = fls_dat %&gt;% 
+  group_by(study, yield_class) %&gt;% 
+  summarise() %&gt;%
+  tabyl(yield_class)
+a1 </code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["yield_class"],"name":[1],"type":["chr"],"align":["left"]},{"label":["n"],"name":[2],"type":["int"],"align":["right"]},{"label":["percent"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"High","2":"29","3":"0.5087719"},{"1":"Low","2":"28","3":"0.4912281"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+<div id="disease-class" class="section level3">
+<h3>Disease class</h3>
+<p>Here we will group the severity data into two disease pressure situations, low or high, based on median of disease severity in the Check.</p>
+<pre class="r"><code>summary(fls_dat$sev_check) # the median value of the FLS severity in the untreated plots was 34.57%</code></pre>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   3.132  13.150  34.575  33.465  45.500  86.250</code></pre>
+<pre class="r"><code>fls_dat &lt;- fls_dat %&gt;%
+  mutate(sev_class = case_when(sev_check &lt;= 34.57 ~ &quot;Low&quot;,
+                         sev_check &gt; 34.57 ~ &quot;High&quot;))
+
+a2 = fls_dat %&gt;% 
+  group_by(study, sev_class) %&gt;% 
+  summarise() %&gt;%
+  tabyl(sev_class)
+a2</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["sev_class"],"name":[1],"type":["chr"],"align":["left"]},{"label":["n"],"name":[2],"type":["int"],"align":["right"]},{"label":["percent"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"High","2":"21","3":"0.5384615"},{"1":"Low","2":"18","3":"0.4615385"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<div id="population-average-mixed-model-estimates" class="section level2">
+<h2>Population-average mixed model estimates</h2>
+<p>We will use the <code>lmer</code> function of the <code>lme4</code> to fit three different kinds of mixed models: random intercepts and slopes, random intercepts only and random slopes only.</p>
+<pre class="r"><code>library(lme4)
+
+# null model
+mix_yld &lt;- lmer(mean_yld ~ 1 + (1 | study), data = fls_dat, REML = F)
+
+# random intercept and slopes
+mix_yld1 &lt;- lmer(mean_yld ~ mean_sev + (mean_sev | study), data = fls_dat, REML = F)
+
+# random slopes
+mix_yld2 &lt;- lmer(mean_yld ~ mean_sev + (1 | mean_sev), data = fls_dat, REML = F)
+
+# random intercepts
+mix_yld3 &lt;- lmer(mean_yld ~ mean_sev + (1 | study), data = fls_dat, REML = F)</code></pre>
+<p>Here we can check which model best fitted the data based on the lowest AIC, which was the one with both intercepts and slopes as random effects.</p>
+<pre class="r"><code>AIC(mix_yld, mix_yld1, mix_yld2, mix_yld3)</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["df"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["AIC"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"3","2":"7912.169","_rn_":"mix_yld"},{"1":"6","2":"7688.489","_rn_":"mix_yld1"},{"1":"4","2":"9130.331","_rn_":"mix_yld2"},{"1":"4","2":"7726.543","_rn_":"mix_yld3"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<pre class="r"><code>summary(mix_yld1)</code></pre>
+<pre><code>## Linear mixed model fit by maximum likelihood  [&#39;lmerMod&#39;]
+## Formula: mean_yld ~ mean_sev + (mean_sev | study)
+##    Data: fls_dat
+## 
+##      AIC      BIC   logLik deviance df.resid 
+##   7688.5   7714.3  -3838.2   7676.5      543 
+## 
+## Scaled residuals: 
+##     Min      1Q  Median      3Q     Max 
+## -4.3928 -0.5284  0.0149  0.5278  4.7995 
+## 
+## Random effects:
+##  Groups   Name        Variance Std.Dev. Corr 
+##  study    (Intercept) 980912.9 990.41        
+##           mean_sev       101.2  10.06   -0.02
+##  Residual              43160.9 207.75        
+## Number of obs: 549, groups:  study, 39
+## 
+## Fixed effects:
+##             Estimate Std. Error t value
+## (Intercept) 3719.899    161.550  23.026
+## mean_sev     -19.080      2.293  -8.322
+## 
+## Correlation of Fixed Effects:
+##          (Intr)
+## mean_sev -0.118
+## optimizer (nloptwrap) convergence code: 0 (OK)
+## Model failed to converge with max|grad| = 0.023656 (tol = 0.002, component 1)</code></pre>
+<pre class="r"><code>confint.merMod(mix_yld1, method = &quot;Wald&quot;)</code></pre>
+<pre><code>##                  2.5 %     97.5 %
+## .sig01              NA         NA
+## .sig02              NA         NA
+## .sig03              NA         NA
+## .sigma              NA         NA
+## (Intercept) 3403.26701 4036.53087
+## mean_sev     -23.57404  -14.58645</code></pre>
+<div id="effect-of-baseline-sev" class="section level3">
+<h3>Effect of baseline sev</h3>
+<p>Let’s include an interaction term and test whether variance was significantly reduced based on likelihood ratio test.</p>
+<pre class="r"><code>mix_yld5 &lt;- lmer(mean_yld ~ mean_sev * sev_class + (mean_sev | study), data = fls_dat, REML = F)</code></pre>
+<pre class="r"><code>AIC(mix_yld1, mix_yld5)</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["df"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["AIC"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"6","2":"7688.489","_rn_":"mix_yld1"},{"1":"8","2":"7689.066","_rn_":"mix_yld5"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<pre class="r"><code>anova(mix_yld1, mix_yld5, test = &quot;Chisq&quot;)</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["npar"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["AIC"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["BIC"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["logLik"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["deviance"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["Chisq"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["Df"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["Pr(>Chisq)"],"name":[8],"type":["dbl"],"align":["right"]}],"data":[{"1":"6","2":"7688.489","3":"7714.338","4":"-3838.245","5":"7676.489","6":"NA","7":"NA","8":"NA","_rn_":"mix_yld1"},{"1":"8","2":"7689.066","3":"7723.531","4":"-3836.533","5":"7673.066","6":"3.422968","7":"2","8":"0.1805976","_rn_":"mix_yld5"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<pre class="r"><code>summary(mix_yld5)</code></pre>
+<pre><code>## Linear mixed model fit by maximum likelihood  [&#39;lmerMod&#39;]
+## Formula: mean_yld ~ mean_sev * sev_class + (mean_sev | study)
+##    Data: fls_dat
+## 
+##      AIC      BIC   logLik deviance df.resid 
+##   7689.1   7723.5  -3836.5   7673.1      541 
+## 
+## Scaled residuals: 
+##     Min      1Q  Median      3Q     Max 
+## -4.4194 -0.5306  0.0165  0.5188  4.8051 
+## 
+## Random effects:
+##  Groups   Name        Variance Std.Dev. Corr 
+##  study    (Intercept) 906307.5 952.00        
+##           mean_sev       100.8  10.04   -0.02
+##  Residual              43133.0 207.68        
+## Number of obs: 549, groups:  study, 39
+## 
+## Fixed effects:
+##                       Estimate Std. Error t value
+## (Intercept)           3983.069    213.985  18.614
+## mean_sev               -18.740      2.598  -7.212
+## sev_classLow          -555.199    311.575  -1.782
+## mean_sev:sev_classLow   -2.195      5.507  -0.399
+## 
+## Correlation of Fixed Effects:
+##             (Intr) men_sv sv_clL
+## mean_sev    -0.136              
+## sev_classLw -0.687  0.094       
+## mn_sv:sv_cL  0.064 -0.472 -0.118</code></pre>
+<pre class="r"><code>confint(mix_yld5) </code></pre>
+<pre><code>## Computing profile confidence intervals ...</code></pre>
+<pre><code>##                               2.5 %       97.5 %
+## .sig01                  769.4102731 1215.7194473
+## .sig02                   -0.4981247    0.4909297
+## .sig03                    6.8210550   14.5963431
+## .sigma                  195.2409474  221.5004802
+## (Intercept)            3554.4819457 4413.4675512
+## mean_sev                -24.0253307  -13.4342442
+## sev_classLow          -1182.2874197   69.6964838
+## mean_sev:sev_classLow   -13.5722969    9.0467374</code></pre>
+</div>
+<div id="effect-of-yield-class" class="section level3">
+<h3>Effect of yield class</h3>
+<p>Let’s include an interaction term and test whether variance was significantly reduced based on likelihood ratio test.</p>
+<pre class="r"><code>mix_yld8 &lt;- lmer(mean_yld ~ mean_sev * yield_class + (mean_sev | study), data = fls_dat, REML = F)</code></pre>
+<pre class="r"><code>AIC(mix_yld1, mix_yld8)</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["df"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["AIC"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"6","2":"7688.489","_rn_":"mix_yld1"},{"1":"8","2":"7607.923","_rn_":"mix_yld8"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<pre class="r"><code>anova(mix_yld1, mix_yld8, test = &quot;Chisq&quot;)</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["npar"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["AIC"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["BIC"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["logLik"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["deviance"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["Chisq"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["Df"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["Pr(>Chisq)"],"name":[8],"type":["dbl"],"align":["right"]}],"data":[{"1":"6","2":"7688.489","3":"7714.338","4":"-3838.245","5":"7676.489","6":"NA","7":"NA","8":"NA","_rn_":"mix_yld1"},{"1":"8","2":"7607.923","3":"7642.388","4":"-3795.961","5":"7591.923","6":"84.56631","7":"2","8":"4.331717e-19","_rn_":"mix_yld8"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<pre class="r"><code>summary(mix_yld8)</code></pre>
+<pre><code>## Linear mixed model fit by maximum likelihood  [&#39;lmerMod&#39;]
+## Formula: mean_yld ~ mean_sev * yield_class + (mean_sev | study)
+##    Data: fls_dat
+## 
+##      AIC      BIC   logLik deviance df.resid 
+##   7607.9   7642.4  -3796.0   7591.9      541 
+## 
+## Scaled residuals: 
+##     Min      1Q  Median      3Q     Max 
+## -4.3423 -0.5478 -0.0051  0.5032  5.1193 
+## 
+## Random effects:
+##  Groups   Name        Variance  Std.Dev. Corr 
+##  study    (Intercept) 723401.03 850.530       
+##           mean_sev        98.99   9.949  -0.10
+##  Residual              37283.72 193.090       
+## Number of obs: 549, groups:  study, 39
+## 
+## Fixed effects:
+##                         Estimate Std. Error t value
+## (Intercept)             3842.704    141.588  27.140
+## mean_sev                 -16.203      2.454  -6.602
+## yield_classLow          -387.578     54.345  -7.132
+## mean_sev:yield_classLow    1.819      1.802   1.010
+## 
+## Correlation of Fixed Effects:
+##             (Intr) men_sv yld_cL
+## mean_sev    -0.214              
+## yild_clssLw -0.173  0.193       
+## mn_sv:yld_L  0.165 -0.398 -0.744</code></pre>
+<pre class="r"><code>library(emmeans)
+library(multcomp)
+cld(emmeans(mix_yld8, ~ mean_sev * yield_class))</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["mean_sev"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["yield_class"],"name":[2],"type":["fct"],"align":["left"]},{"label":["emmean"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["SE"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["df"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["lower.CL"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["upper.CL"],"name":[7],"type":["dbl"],"align":["right"]},{"label":[".group"],"name":[8],"type":["chr"],"align":["left"]}],"data":[{"1":"19.67672","2":"Low","3":"3172.107","4":"141.3695","5":"41.29197","6":"2886.667","7":"3457.547","8":"1","_rn_":"2"},{"1":"19.67672","2":"High","3":"3523.884","4":"141.4806","5":"41.35604","6":"3238.233","7":"3809.535","8":"2","_rn_":"1"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>Extract the random coefficients (BLUES).</p>
+<pre class="r"><code>blup &lt;- coef(mix_yld1)$study
+colnames(blup) &lt;- c(&quot;Intercept&quot;, &quot;Slope&quot;)
+
+summary(blup)</code></pre>
+<pre><code>##    Intercept        Slope       
+##  Min.   :1386   Min.   :-39.85  
+##  1st Qu.:3043   1st Qu.:-23.11  
+##  Median :3863   Median :-18.25  
+##  Mean   :3720   Mean   :-19.08  
+##  3rd Qu.:4442   3rd Qu.:-15.02  
+##  Max.   :5160   Max.   : -4.53</code></pre>
+<p>Calculate the interdecile range for the BLUEs of the slopes and intercepts</p>
+<pre class="r"><code># Intercept
+dec90_i &lt;- quantile(blup$Intercept, probs = c(.9))
+dec10_i &lt;- quantile(blup$Intercept, probs = c(.1))
+dec90_i - dec10_i</code></pre>
+<pre><code>##      90% 
+## 2488.298</code></pre>
+<pre class="r"><code># Slopes
+dec90_s &lt;- quantile(blup$Slope, probs = c(.9))
+dec10_s &lt;- quantile(blup$Slope, probs = c(.1))
+dec90_s - dec10_s</code></pre>
+<pre><code>##      90% 
+## 18.00895</code></pre>
+</div>
+</div>
+<div id="correlation-coefficient" class="section level2">
+<h2>Correlation coefficient</h2>
+<p>We firstly summarize the Fisher’s z as the effect size for the study of the strength of the association between FLS severity and soybean yield.</p>
+<pre class="r"><code>cor_yld_sev &lt;- fls_dat %&gt;% 
+  group_by(study) %&gt;% 
+  do(tidy(cor.test(.$mean_sev, .$mean_yld), method = &quot;pearson&quot;))
+cor_yld_sev</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["study"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["estimate"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["statistic"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["p.value"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["parameter"],"name":[5],"type":["int"],"align":["right"]},{"label":["conf.low"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["conf.high"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["method"],"name":[8],"type":["chr"],"align":["left"]},{"label":["alternative"],"name":[9],"type":["chr"],"align":["left"]}],"data":[{"1":"1","2":"-0.45118163","3":"-1.59873398","4":"1.409633e-01","5":"10","6":"-0.8142471","7":"0.165599234","8":"Pearson's product-moment correlation","9":"two.sided"},{"1":"2","2":"-0.38579948","3":"-1.18277283","4":"2.708559e-01","5":"8","6":"-0.8169748","7":"0.322057697","8":"Pearson's product-moment correlation","9":"two.sided"},{"1":"3","2":"-0.88057671","3":"-7.43253792","4":"1.421075e-06","5":"16","6":"-0.9548810","7":"-0.702525229","8":"Pearson's product-moment correlation","9":"two.sided"},{"1":"4","2":"-0.57161633","3":"-2.20300209","4":"5.217526e-02","5":"10","6":"-0.8625553","7":"0.003400982","8":"Pearson's product-moment correlation","9":"two.sided"},{"1":"6","2":"-0.92911885","3":"-7.10675574","4":"1.013150e-04","5":"8","6":"-0.9834369","7":"-0.721664726","8":"Pearson's product-moment correlation","9":"two.sided"},{"1":"7","2":"-0.73791977","3":"-3.28018551","4":"9.526447e-03","5":"9","6":"-0.9273114","7":"-0.247684829","8":"Pearson's product-moment correlation","9":"two.sided"},{"1":"8","2":"-0.69257821","3":"-3.03617727","4":"1.254416e-02","5":"10","6":"-0.9062651","7":"-0.196964361","8":"Pearson's product-moment correlation","9":"two.sided"},{"1":"9","2":"-0.54710408","3":"-2.06685966","4":"6.562839e-02","5":"10","6":"-0.8531350","7":"0.039062544","8":"Pearson's product-moment correlation","9":"two.sided"},{"1":"10","2":"-0.31862243","3":"-1.06297290","4":"3.127895e-01","5":"10","6":"-0.7545488","7":"0.312404903","8":"Pearson's product-moment correlation","9":"two.sided"},{"1":"11","2":"-0.17862045","3":"-0.57407978","4":"5.785970e-01","5":"10","6":"-0.6825532","7":"0.440429882","8":"Pearson's product-moment correlation","9":"two.sided"},{"1":"12","2":"-0.93342049","3":"-8.22704531","4":"9.207491e-06","5":"10","6":"-0.9815266","7":"-0.774310401","8":"Pearson's product-moment correlation","9":"two.sided"},{"1":"13","2":"-0.63172136","3":"-2.44475619","4":"3.707426e-02","5":"9","6":"-0.8931382","7":"-0.051278555","8":"Pearson's product-moment correlation","9":"two.sided"},{"1":"14","2":"-0.69664076","3":"-3.07068535","4":"1.182699e-02","5":"10","6":"-0.9076578","7":"-0.204498179","8":"Pearson's product-moment correlation","9":"two.sided"},{"1":"15","2":"-0.79236958","3":"-4.10741441","4":"2.119295e-03","5":"10","6":"-0.9391844","7":"-0.400669110","8":"Pearson's product-moment correlation","9":"two.sided"},{"1":"16","2":"-0.72868917","3":"-3.36473054","4":"7.184870e-03","5":"10","6":"-0.9184844","7":"-0.266047535","8":"Pearson's product-moment correlation","9":"two.sided"},{"1":"17","2":"-0.79469292","3":"-3.92756664","4":"3.470844e-03","5":"9","6":"-0.9443708","7":"-0.372298917","8":"Pearson's product-moment correlation","9":"two.sided"},{"1":"19","2":"-0.72045832","3":"-3.28521270","4":"8.216229e-03","5":"10","6":"-0.9157307","7":"-0.249871699","8":"Pearson's product-moment correlation","9":"two.sided"},{"1":"20","2":"-0.02933085","3":"-0.09732130","4":"9.242219e-01","5":"11","6":"-0.5710869","7":"0.530223320","8":"Pearson's product-moment correlation","9":"two.sided"},{"1":"21","2":"-0.75718736","3":"-4.17955798","4":"1.079948e-03","5":"13","6":"-0.9146693","7":"-0.400124321","8":"Pearson's product-moment correlation","9":"two.sided"},{"1":"22","2":"0.02084044","3":"0.07515759","4":"9.412336e-01","5":"13","6":"-0.4967253","7":"0.527472105","8":"Pearson's product-moment correlation","9":"two.sided"},{"1":"24","2":"-0.94059997","3":"-11.75384210","4":"7.040205e-10","5":"18","6":"-0.9766181","7":"-0.853218694","8":"Pearson's product-moment correlation","9":"two.sided"},{"1":"25","2":"-0.75571136","3":"-4.89569103","4":"1.164154e-04","5":"18","6":"-0.8979436","7":"-0.470551433","8":"Pearson's product-moment correlation","9":"two.sided"},{"1":"29","2":"-0.77747926","3":"-4.62557063","4":"3.928898e-04","5":"14","6":"-0.9190010","7":"-0.458467647","8":"Pearson's product-moment correlation","9":"two.sided"},{"1":"30","2":"-0.66007717","3":"-3.16819632","4":"7.407536e-03","5":"13","6":"-0.8761013","7":"-0.223329355","8":"Pearson's product-moment correlation","9":"two.sided"},{"1":"32","2":"-0.45173145","3":"-2.08768503","4":"5.218787e-02","5":"17","6":"-0.7517054","7":"0.003117485","8":"Pearson's product-moment correlation","9":"two.sided"},{"1":"33","2":"-0.11706408","3":"-0.48600917","4":"6.331660e-01","5":"17","6":"-0.5424314","7":"0.356078468","8":"Pearson's product-moment correlation","9":"two.sided"},{"1":"35","2":"-0.70802055","3":"-3.47307204","4":"4.604803e-03","5":"12","6":"-0.9003671","7":"-0.284206331","8":"Pearson's product-moment correlation","9":"two.sided"},{"1":"37","2":"0.08641113","3":"0.31272949","4":"7.594464e-01","5":"13","6":"-0.4455752","7":"0.573296864","8":"Pearson's product-moment correlation","9":"two.sided"},{"1":"39","2":"-0.43561175","3":"-2.05318631","4":"5.488019e-02","5":"18","6":"-0.7362145","7":"0.008558905","8":"Pearson's product-moment correlation","9":"two.sided"},{"1":"40","2":"-0.15609485","3":"-0.65158260","4":"5.233823e-01","5":"17","6":"-0.5698985","7":"0.320863579","8":"Pearson's product-moment correlation","9":"two.sided"},{"1":"41","2":"-0.15287789","3":"-0.63782932","4":"5.320828e-01","5":"17","6":"-0.5676691","7":"0.323816764","8":"Pearson's product-moment correlation","9":"two.sided"},{"1":"52","2":"-0.43775300","3":"-1.37710930","4":"2.057795e-01","5":"8","6":"-0.8367528","7":"0.264879637","8":"Pearson's product-moment correlation","9":"two.sided"},{"1":"54","2":"-0.63811712","3":"-3.10104398","4":"7.816167e-03","5":"14","6":"-0.8613590","7":"-0.208301238","8":"Pearson's product-moment correlation","9":"two.sided"},{"1":"59","2":"-0.76869986","3":"-3.39927871","4":"9.370457e-03","5":"8","6":"-0.9422723","7":"-0.269519081","8":"Pearson's product-moment correlation","9":"two.sided"},{"1":"61","2":"-0.86693528","3":"-6.95745754","4":"3.228311e-06","5":"16","6":"-0.9494992","7":"-0.672091733","8":"Pearson's product-moment correlation","9":"two.sided"},{"1":"62","2":"-0.76283740","3":"-3.91290309","4":"2.422211e-03","5":"11","6":"-0.9250239","7":"-0.365458955","8":"Pearson's product-moment correlation","9":"two.sided"},{"1":"63","2":"0.08661757","3":"0.28836174","4":"7.784310e-01","5":"11","6":"-0.4876404","7":"0.608559369","8":"Pearson's product-moment correlation","9":"two.sided"},{"1":"64","2":"-0.14860170","3":"-0.54180665","4":"5.971162e-01","5":"13","6":"-0.6141161","7":"0.393625122","8":"Pearson's product-moment correlation","9":"two.sided"},{"1":"66","2":"-0.13817170","3":"-0.44116884","4":"6.684763e-01","5":"10","6":"-0.6597566","7":"0.473257825","8":"Pearson's product-moment correlation","9":"two.sided"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<pre class="r"><code>summary(cor_yld_sev$estimate)</code></pre>
+<pre><code>##     Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
+## -0.94060 -0.76001 -0.63812 -0.52565 -0.24862  0.08662</code></pre>
+<pre class="r"><code>hist_pears &lt;- ggplot(cor_yld_sev, aes(estimate)) + 
+  geom_histogram(bin = 0.1, binwidth = 0.1, color = &quot;black&quot; , fill = &quot;black&quot;,
+                 alpha = 0.1) + 
+  theme_half_open()+
+  theme(axis.title = element_text(size=12),
+        axis.text = element_text(size=12))+
+  labs(x = expression(&quot;Pearson&#39;s correlation coefficient&quot; ~italic(&quot;r&quot;)), 
+                      y = &quot;Frequency&quot;)</code></pre>
+<pre><code>## Warning: Ignoring unknown parameters: bin</code></pre>
+<pre class="r"><code>hist_pears</code></pre>
+<p><img src="code_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+<p>Let’s extract the first row of each study from the <code>fls_dat</code> data frame and then combine with the new <code>cor_yld_sev</code> data frame that contains the correlation statistics. We will add a new column (n) for the number of data points per study using the <code>mutate</code> function.</p>
+<pre class="r"><code>fls_dat2 = fls_dat %&gt;% 
+  group_by(study) %&gt;% 
+  filter(row_number() == 1)
+
+fls_dat3 &lt;- full_join(cor_yld_sev, fls_dat2, by = &quot;study&quot;) %&gt;% 
+           mutate(n2 = parameter + 2)  
+
+yield_max &lt;- fls_dat %&gt;%
+  filter(mean_yld != &quot;NA&quot;) %&gt;% 
+  group_by(study) %&gt;% 
+  summarize(max_yield = max(mean_yld))
+
+# Grouping the yield max information in a new column
+fls_dat3 &lt;- left_join(fls_dat3, yield_max) %&gt;% 
+  mutate(yield_class = case_when(max_yield &lt;= 3352 ~ &quot;low&quot;,
+                         max_yield &gt; 3352 ~ &quot;high&quot;)) %&gt;% 
+  mutate(sev_class = case_when(sev_check &lt;= 34 ~ &quot;low&quot;,
+                         sev_check &gt; 34 ~ &quot;high&quot;))</code></pre>
+<pre><code>## Joining, by = &quot;study&quot;</code></pre>
+<pre class="r"><code>fls_dat3</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["study"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["estimate"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["statistic"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["p.value"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["parameter"],"name":[5],"type":["int"],"align":["right"]},{"label":["conf.low"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["conf.high"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["method"],"name":[8],"type":["chr"],"align":["left"]},{"label":["alternative"],"name":[9],"type":["chr"],"align":["left"]},{"label":["year"],"name":[10],"type":["dbl"],"align":["right"]},{"label":["location"],"name":[11],"type":["chr"],"align":["left"]},{"label":["state"],"name":[12],"type":["chr"],"align":["left"]},{"label":["cultivar"],"name":[13],"type":["chr"],"align":["left"]},{"label":["planting_date"],"name":[14],"type":["chr"],"align":["left"]},{"label":["app_date"],"name":[15],"type":["chr"],"align":["left"]},{"label":["growth_stage"],"name":[16],"type":["chr"],"align":["left"]},{"label":["brand_name"],"name":[17],"type":["chr"],"align":["left"]},{"label":["group"],"name":[18],"type":["chr"],"align":["left"]},{"label":["active_ingred"],"name":[19],"type":["chr"],"align":["left"]},{"label":["n"],"name":[20],"type":["dbl"],"align":["right"]},{"label":["mean_sev"],"name":[21],"type":["dbl"],"align":["right"]},{"label":["mean_yld"],"name":[22],"type":["dbl"],"align":["right"]},{"label":["v_sev"],"name":[23],"type":["dbl"],"align":["right"]},{"label":["v_yld"],"name":[24],"type":["dbl"],"align":["right"]},{"label":["rep"],"name":[25],"type":["dbl"],"align":["right"]},{"label":["rating_disease"],"name":[26],"type":["chr"],"align":["left"]},{"label":["yld_check"],"name":[27],"type":["dbl"],"align":["right"]},{"label":["v_yld_check"],"name":[28],"type":["dbl"],"align":["right"]},{"label":["sev_check"],"name":[29],"type":["dbl"],"align":["right"]},{"label":["v_sev_check"],"name":[30],"type":["dbl"],"align":["right"]},{"label":["difer"],"name":[31],"type":["dbl"],"align":["right"]},{"label":["yield_class"],"name":[32],"type":["chr"],"align":["left"]},{"label":["sev_class"],"name":[33],"type":["chr"],"align":["left"]},{"label":["n2"],"name":[34],"type":["dbl"],"align":["right"]},{"label":["max_yield"],"name":[35],"type":["dbl"],"align":["right"]}],"data":[{"1":"1","2":"-0.45118163","3":"-1.59873398","4":"1.409633e-01","5":"10","6":"-0.8142471","7":"0.165599234","8":"Pearson's product-moment correlation","9":"two.sided","10":"2015","11":"TVREC","12":"Alabama","13":"NA","14":"NA","15":"NA","16":"R3","17":"Affiance","18":"QoI+DMI","19":"azoxystrobin+tetraconazole","20":"4","21":"29.75000","22":"4912.613","23":"178.980429","24":"39232.887","25":"NA","26":"NA","27":"4747.850","28":"39232.887","29":"45.5000","30":"178.980429","31":"40.50000","32":"high","33":"high","34":"12","35":"5173.206"},{"1":"2","2":"-0.38579948","3":"-1.18277283","4":"2.708559e-01","5":"8","6":"-0.8169748","7":"0.322057697","8":"Pearson's product-moment correlation","9":"two.sided","10":"2015","11":"NRES","12":"Arkansas","13":"Armor 4744","14":"NA","15":"NA","16":"R3","17":"Affiance","18":"QoI+DMI","19":"azoxystrobin+tetraconazole","20":"4","21":"8.75000","22":"3091.819","23":"4.591540","24":"92661.774","25":"NA","26":"NA","27":"2943.869","28":"92661.774","29":"13.7500","30":"4.591540","31":"8.75000","32":"high","33":"low","34":"10","35":"3607.963"},{"1":"3","2":"-0.88057671","3":"-7.43253792","4":"1.421075e-06","5":"16","6":"-0.9548810","7":"-0.702525229","8":"Pearson's product-moment correlation","9":"two.sided","10":"2015","11":"Dixon Springs","12":"Illinois","13":"Armor 4744","14":"05/23/2015","15":"07/31/2015","16":"R3","17":"Affiance","18":"QoI+DMI","19":"azoxystrobin+tetraconazole","20":"4","21":"10.75000","22":"3199.419","23":"10.387800","24":"83702.631","25":"NA","26":"NA","27":"2468.075","28":"83702.631","29":"34.7500","30":"10.387800","31":"29.25000","32":"high","33":"high","34":"18","35":"3423.025"},{"1":"4","2":"-0.57161633","3":"-2.20300209","4":"5.217526e-02","5":"10","6":"-0.8625553","7":"0.003400982","8":"Pearson's product-moment correlation","9":"two.sided","10":"2015","11":"Carbondale","12":"Illinois","13":"AG 4433","14":"5/29/2015","15":"07/21/2015","16":"R3","17":"Affiance","18":"QoI+DMI","19":"azoxystrobin+tetraconazole","20":"4","21":"25.00000","22":"3693.706","23":"53.424874","24":"68591.855","25":"NA","26":"NA","27":"3307.019","28":"68591.855","29":"42.5000","30":"53.424874","31":"31.25000","32":"high","33":"high","34":"12","35":"3947.575"},{"1":"6","2":"-0.92911885","3":"-7.10675574","4":"1.013150e-04","5":"8","6":"-0.9834369","7":"-0.721664726","8":"Pearson's product-moment correlation","9":"two.sided","10":"2015","11":"Princeton","12":"Kentucky","13":"NA","14":"NA","15":"07/21/2015","16":"R3","17":"Affiance","18":"QoI+DMI","19":"azoxystrobin+tetraconazole","20":"4","21":"26.67500","22":"3644.950","23":"5.971763","24":"60465.943","25":"NA","26":"NA","27":"2580.719","28":"60465.943","29":"50.0000","30":"5.971763","31":"30.85000","32":"high","33":"high","34":"10","35":"3969.431"},{"1":"7","2":"-0.73791977","3":"-3.28018551","4":"9.526447e-03","5":"9","6":"-0.9273114","7":"-0.247684829","8":"Pearson's product-moment correlation","9":"two.sided","10":"2015","11":"Baton Rouge","12":"Louisiana","13":"NA","14":"NA","15":"NA","16":"R3","17":"Affiance","18":"QoI+DMI","19":"azoxystrobin+tetraconazole","20":"4","21":"37.50000","22":"3127.125","23":"34.886364","24":"71536.385","25":"NA","26":"NA","27":"2690.336","28":"71536.385","29":"82.5000","30":"34.886364","31":"60.00000","32":"high","33":"high","34":"11","35":"3407.894"},{"1":"8","2":"-0.69257821","3":"-3.03617727","4":"1.254416e-02","5":"10","6":"-0.9062651","7":"-0.196964361","8":"Pearson's product-moment correlation","9":"two.sided","10":"2015","11":"Crowley","12":"Louisiana","13":"NA","14":"NA","15":"NA","16":"R3","17":"Affiance","18":"QoI+DMI","19":"azoxystrobin+tetraconazole","20":"4","21":"35.00000","22":"3615.864","23":"19.696970","24":"32726.316","25":"NA","26":"NA","27":"3293.233","28":"32726.316","29":"86.2500","30":"19.696970","31":"76.25000","32":"high","33":"high","34":"12","35":"4245.661"},{"1":"9","2":"-0.54710408","3":"-2.06685966","4":"6.562839e-02","5":"10","6":"-0.8531350","7":"0.039062544","8":"Pearson's product-moment correlation","9":"two.sided","10":"2015","11":"Turtleback","12":"Louisiana","13":"NA","14":"NA","15":"NA","16":"R3","17":"Affiance","18":"QoI+DMI","19":"azoxystrobin+tetraconazole","20":"4","21":"2.45000","22":"1474.456","23":"2.498813","24":"31092.503","25":"NA","26":"NA","27":"1452.600","28":"31092.503","29":"8.3000","30":"2.498813","31":"6.55000","32":"low","33":"low","34":"12","35":"1657.713"},{"1":"10","2":"-0.31862243","3":"-1.06297290","4":"3.127895e-01","5":"10","6":"-0.7545488","7":"0.312404903","8":"Pearson's product-moment correlation","9":"two.sided","10":"2015","11":"NA","12":"Mississippi","13":"DynaGro 37RY47","14":"6/6/2015","15":"07/29/2015","16":"R3","17":"check","18":"check","19":"check","20":"4","21":"52.50000","22":"3244.812","23":"89.898990","24":"67704.245","25":"NA","26":"NA","27":"3244.812","28":"67704.245","29":"52.5000","30":"89.898990","31":"10.00000","32":"high","33":"high","34":"12","35":"3412.938"},{"1":"11","2":"-0.17862045","3":"-0.57407978","4":"5.785970e-01","5":"10","6":"-0.6825532","7":"0.440429882","8":"Pearson's product-moment correlation","9":"two.sided","10":"2015","11":"Cotton Grove","12":"Tennessee","13":"Armor 4744","14":"06/07/2015","15":"08/11/2015","16":"R3","17":"Affiance","18":"QoI+DMI","19":"azoxystrobin+tetraconazole","20":"4","21":"2.75000","22":"4119.062","23":"6.949192","24":"91781.523","25":"NA","26":"NA","27":"4038.363","28":"91781.523","29":"7.7500","30":"6.949192","31":"7.00000","32":"high","33":"low","34":"12","35":"4472.125"},{"1":"12","2":"-0.93342049","3":"-8.22704531","4":"9.207491e-06","5":"10","6":"-0.9815266","7":"-0.774310401","8":"Pearson's product-moment correlation","9":"two.sided","10":"2015","11":"Milan","12":"Tennessee","13":"NA","14":"6/5/2015","15":"8/7/2015","16":"R3","17":"Affiance","18":"QoI+DMI","19":"azoxystrobin+tetraconazole","20":"4","21":"14.17500","22":"3147.300","23":"45.864703","24":"87494.453","25":"NA","26":"NA","27":"2573.994","28":"87494.453","29":"44.2500","30":"45.864703","31":"37.82500","32":"high","33":"high","34":"12","35":"3557.525"},{"1":"13","2":"-0.63172136","3":"-2.44475619","4":"3.707426e-02","5":"9","6":"-0.8931382","7":"-0.051278555","8":"Pearson's product-moment correlation","9":"two.sided","10":"2016","11":"TVREC","12":"Alabama","13":"Asgrow 5233 RR","14":"06/20/2016","15":"08/19/2016","16":"R3","17":"Affiance","18":"QoI+DMI","19":"azoxystrobin+tetraconazole","20":"5","21":"3.26000","22":"1708.150","23":"1.606347","24":"19849.856","25":"NA","26":"NA","27":"1464.705","28":"19849.856","29":"11.8600","30":"1.606347","31":"9.02000","32":"low","33":"low","34":"11","35":"1757.915"},{"1":"14","2":"-0.69664076","3":"-3.07068535","4":"1.182699e-02","5":"10","6":"-0.9076578","7":"-0.204498179","8":"Pearson's product-moment correlation","9":"two.sided","10":"2016","11":"NRES","12":"Arkansas","13":"NA","14":"NA","15":"NA","16":"R3","17":"Affiance","18":"QoI+DMI","19":"azoxystrobin+tetraconazole","20":"4","21":"9.00000","22":"3446.562","23":"1.767677","24":"66813.780","25":"NA","26":"NA","27":"3048.106","28":"66813.780","29":"11.7500","30":"1.767677","31":"7.25000","32":"high","33":"low","34":"12","35":"3698.750"},{"1":"15","2":"-0.79236958","3":"-4.10741441","4":"2.119295e-03","5":"10","6":"-0.9391844","7":"-0.400669110","8":"Pearson's product-moment correlation","9":"two.sided","10":"2016","11":"Shawneetown","12":"Illinois","13":"S39-U2","14":"6/13/2016","15":"7/27/2016","16":"R3","17":"Affiance","18":"QoI+DMI","19":"azoxystrobin+tetraconazole","20":"6","21":"68.33333","22":"2914.167","23":"22.601010","24":"40919.814","25":"NA","26":"NA","27":"2574.554","28":"40919.814","29":"75.0000","30":"22.601010","31":"16.66667","32":"high","33":"high","34":"12","35":"3383.796"},{"1":"16","2":"-0.72868917","3":"-3.36473054","4":"7.184870e-03","5":"10","6":"-0.9184844","7":"-0.266047535","8":"Pearson's product-moment correlation","9":"two.sided","10":"2016","11":"Ames","12":"Iowa","13":"2616R2Y","14":"05/22/16","15":"7/26/2016","16":"R3","17":"Affiance","18":"QoI+DMI","19":"azoxystrobin+tetraconazole","20":"4","21":"3.85000","22":"4699.094","23":"67.203037","24":"70938.477","25":"NA","26":"NA","27":"4260.288","28":"70938.477","29":"34.5750","30":"67.203037","31":"31.62500","32":"high","33":"high","34":"12","35":"4924.381"},{"1":"17","2":"-0.79469292","3":"-3.92756664","4":"3.470844e-03","5":"9","6":"-0.9443708","7":"-0.372298917","8":"Pearson's product-moment correlation","9":"two.sided","10":"2016","11":"Princeton","12":"Kentucky","13":"NA","14":"NA","15":"7/26/2016","16":"R3","17":"Affiance","18":"QoI+DMI","19":"azoxystrobin+tetraconazole","20":"4","21":"25.42500","22":"4519.200","23":"9.755404","24":"116180.740","25":"NA","26":"NA","27":"3579.381","28":"116180.740","29":"39.6000","30":"9.755404","31":"25.02500","32":"high","33":"high","34":"11","35":"4645.294"},{"1":"19","2":"-0.72045832","3":"-3.28521270","4":"8.216229e-03","5":"10","6":"-0.9157307","7":"-0.249871699","8":"Pearson's product-moment correlation","9":"two.sided","10":"2016","11":"Winnsboro","12":"Louisiana","13":"NA","14":"NA","15":"NA","16":"R3","17":"Affiance","18":"QoI+DMI","19":"azoxystrobin+tetraconazole","20":"4","21":"4.02500","22":"3337.281","23":"3.056566","24":"97942.058","25":"NA","26":"NA","27":"2918.650","28":"97942.058","29":"6.6500","30":"3.056566","31":"7.27500","32":"high","33":"low","34":"12","35":"3626.456"},{"1":"20","2":"-0.02933085","3":"-0.09732130","4":"9.242219e-01","5":"11","6":"-0.5710869","7":"0.530223320","8":"Pearson's product-moment correlation","9":"two.sided","10":"2016","11":"NA","12":"Mississippi","13":"NA","14":"NA","15":"NA","16":"R3","17":"Affiance","18":"QoI+DMI","19":"azoxystrobin+tetraconazole","20":"4","21":"50.00000","22":"4300.637","23":"98.106061","24":"358464.361","25":"NA","26":"NA","27":"4090.481","28":"358464.361","29":"60.0000","30":"98.106061","31":"32.50000","32":"high","33":"high","34":"13","35":"5309.387"},{"1":"21","2":"-0.75718736","3":"-4.17955798","4":"1.079948e-03","5":"13","6":"-0.9146693","7":"-0.400124321","8":"Pearson's product-moment correlation","9":"two.sided","10":"2016","11":"Cotton Grove","12":"Tennessee","13":"NA","14":"NA","15":"NA","16":"R3","17":"Affiance","18":"QoI+DMI","19":"azoxystrobin+tetraconazole","20":"4","21":"9.75000","22":"3451.606","23":"18.977242","24":"27252.679","25":"NA","26":"NA","27":"3093.500","28":"27252.679","29":"14.2500","30":"18.977242","31":"7.75000","32":"high","33":"low","34":"15","35":"3651.675"},{"1":"22","2":"0.02084044","3":"0.07515759","4":"9.412336e-01","5":"13","6":"-0.4967253","7":"0.527472105","8":"Pearson's product-moment correlation","9":"two.sided","10":"2016","11":"Milan","12":"Tennessee","13":"NA","14":"NA","15":"NA","16":"R3","17":"Affiance","18":"QoI+DMI","19":"azoxystrobin+tetraconazole","20":"4","21":"3.25000","22":"2004.050","23":"1.887568","24":"93991.707","25":"NA","26":"NA","27":"2279.775","28":"93991.707","29":"8.0000","30":"1.887568","31":"5.75000","32":"low","33":"low","34":"15","35":"2382.331"},{"1":"24","2":"-0.94059997","3":"-11.75384210","4":"7.040205e-10","5":"18","6":"-0.9766181","7":"-0.853218694","8":"Pearson's product-moment correlation","9":"two.sided","10":"2017","11":"Princeton","12":"Kentucky","13":"NA","14":"NA","15":"7/22/2017","16":"R3","17":"Acropolis","18":"MBC+DMI","19":"thiophanate-methyl+tetraconazole","20":"4","21":"15.42500","22":"2389.056","23":"11.570316","24":"47898.073","25":"NA","26":"NA","27":"1667.800","28":"47898.073","29":"45.0000","30":"11.570316","31":"33.75000","32":"low","33":"high","34":"20","35":"2706.812"},{"1":"25","2":"-0.75571136","3":"-4.89569103","4":"1.164154e-04","5":"18","6":"-0.8979436","7":"-0.470551433","8":"Pearson's product-moment correlation","9":"two.sided","10":"2017","11":"Quicksand","12":"Kentucky","13":"Armor 4744","14":"NA","15":"8/9/2017","16":"R3","17":"Acropolis","18":"MBC+DMI","19":"thiophanate-methyl+tetraconazole","20":"4","21":"16.25000","22":"2859.806","23":"8.585219","24":"142575.449","25":"NA","26":"NA","27":"2548.775","28":"142575.449","29":"43.3250","30":"8.585219","31":"34.07500","32":"low","33":"high","34":"20","35":"3014.481"},{"1":"29","2":"-0.77747926","3":"-4.62557063","4":"3.928898e-04","5":"14","6":"-0.9190010","7":"-0.458467647","8":"Pearson's product-moment correlation","9":"two.sided","10":"2018","11":"Princeton","12":"Kentucky","13":"Armor 4744","14":"06/06/2018","15":"08/02/2018","16":"R3","17":"Acropolis","18":"MBC+DMI","19":"thiophanate-methyl+tetraconazole","20":"4","21":"26.25000","22":"2807.688","23":"8.334637","24":"322563.152","25":"NA","26":"NA","27":"1837.606","28":"322563.152","29":"50.0000","30":"8.334637","31":"34.17500","32":"high","33":"high","34":"16","35":"3769.363"},{"1":"30","2":"-0.66007717","3":"-3.16819632","4":"7.407536e-03","5":"13","6":"-0.8761013","7":"-0.223329355","8":"Pearson's product-moment correlation","9":"two.sided","10":"2018","11":"Quicksand","12":"Kentucky","13":"Armor 4744","14":"NA","15":"07/08/2018","16":"R3","17":"Acropolis","18":"MBC+DMI","19":"thiophanate-methyl+tetraconazole","20":"4","21":"13.35000","22":"2170.494","23":"4.356005","24":"117030.009","25":"NA","26":"NA","27":"1731.688","28":"117030.009","29":"34.5750","30":"4.356005","31":"21.65000","32":"low","33":"high","34":"15","35":"2341.981"},{"1":"32","2":"-0.45173145","3":"-2.08768503","4":"5.218787e-02","5":"17","6":"-0.7517054","7":"0.003117485","8":"Pearson's product-moment correlation","9":"two.sided","10":"2019","11":"DLSB1902","12":"Louisiana","13":"AsGrow 4934","14":"5/28/2019","15":"7/26/2019","16":"R3","17":"Acropolis","18":"MBC+DMI","19":"thiophanate-methyl+tetraconazole","20":"4","21":"45.00000","22":"4063.581","23":"90.820975","24":"72255.218","25":"NA","26":"NA","27":"3981.200","28":"72255.218","29":"63.7500","30":"90.820975","31":"33.75000","32":"high","33":"high","34":"19","35":"4224.981"},{"1":"33","2":"-0.11706408","3":"-0.48600917","4":"6.331660e-01","5":"17","6":"-0.5424314","7":"0.356078468","8":"Pearson's product-moment correlation","9":"two.sided","10":"2019","11":"NESB1902","12":"Louisiana","13":"AsGrow 4934","14":"5/29/2019","15":"7/24/2019","16":"R3","17":"Acropolis","18":"MBC+DMI","19":"thiophanate-methyl+tetraconazole","20":"4","21":"12.50000","22":"2395.781","23":"43.324182","24":"356392.135","25":"NA","26":"NA","27":"2629.475","28":"356392.135","29":"28.7500","30":"43.324182","31":"22.50000","32":"low","33":"low","34":"19","35":"3338.963"},{"1":"35","2":"-0.70802055","3":"-3.47307204","4":"4.604803e-03","5":"12","6":"-0.9003671","7":"-0.284206331","8":"Pearson's product-moment correlation","9":"two.sided","10":"2017","11":"Stoneville","12":"Mississippi","13":"NA","14":"NA","15":"NA","16":"R3","17":"Acropolis","18":"MBC+DMI","19":"thiophanate-methyl+tetraconazole","20":"4","21":"25.00000","22":"3374.773","23":"50.869963","24":"18475.187","25":"NA","26":"NA","27":"2923.862","28":"18475.187","29":"50.0000","30":"50.869963","31":"25.00000","32":"high","33":"high","34":"14","35":"3592.159"},{"1":"37","2":"0.08641113","3":"0.31272949","4":"7.594464e-01","5":"13","6":"-0.4455752","7":"0.573296864","8":"Pearson's product-moment correlation","9":"two.sided","10":"2019","11":"TVREC","12":"Alabama","13":"AG 52X9","14":"06/14/2019","15":"NA","16":"R3","17":"Acropolis","18":"MBC+DMI","19":"thiophanate-methyl+tetraconazole","20":"4","21":"7.72500","22":"1281.112","23":"4.550014","24":"7725.378","25":"NA","26":"NA","27":"1175.194","28":"7725.378","29":"3.1325","30":"4.550014","31":"5.36750","32":"low","33":"low","34":"15","35":"1383.669"},{"1":"39","2":"-0.43561175","3":"-2.05318631","4":"5.488019e-02","5":"18","6":"-0.7362145","7":"0.008558905","8":"Pearson's product-moment correlation","9":"two.sided","10":"2019","11":"Ames","12":"Iowa","13":"AG2733","14":"06/03/2019","15":"08/07/2019","16":"R3","17":"Acropolis","18":"MBC+DMI","19":"thiophanate-methyl+tetraconazole","20":"4","21":"0.75000","22":"4858.812","23":"10.481091","24":"73026.372","25":"NA","26":"NA","27":"4527.606","28":"73026.372","29":"19.8750","30":"10.481091","31":"19.65000","32":"high","33":"low","34":"20","35":"5242.137"},{"1":"40","2":"-0.15609485","3":"-0.65158260","4":"5.233823e-01","5":"17","6":"-0.5698985","7":"0.320863579","8":"Pearson's product-moment correlation","9":"two.sided","10":"2019","11":"Quicksand","12":"Kentucky","13":"NK S48-R2X","14":"05/18/2019","15":"7/16/2019","16":"R3","17":"Acropolis","18":"MBC+DMI","19":"thiophanate-methyl+tetraconazole","20":"4","21":"6.50000","22":"3660.754","23":"1.893264","24":"202192.746","25":"NA","26":"NA","27":"3574.338","28":"202192.746","29":"13.1500","30":"1.893264","31":"8.41500","32":"high","33":"low","34":"19","35":"4420.174"},{"1":"41","2":"-0.15287789","3":"-0.63782932","4":"5.320828e-01","5":"17","6":"-0.5676691","7":"0.323816764","8":"Pearson's product-moment correlation","9":"two.sided","10":"2019","11":"Union County","12":"Kentucky","13":"NA","14":"NA","15":"8/14/2019","16":"R3","17":"Acropolis","18":"MBC+DMI","19":"thiophanate-methyl+tetraconazole","20":"4","21":"7.25000","22":"3052.309","23":"1.793541","24":"478196.029","25":"NA","26":"NA","27":"2713.537","28":"478196.029","29":"15.0000","30":"1.793541","31":"11.66500","32":"low","33":"low","34":"19","35":"3279.446"},{"1":"52","2":"-0.43775300","3":"-1.37710930","4":"2.057795e-01","5":"8","6":"-0.8367528","7":"0.264879637","8":"Pearson's product-moment correlation","9":"two.sided","10":"2020","11":"Union County","12":"Kentucky","13":"NA","14":"NA","15":"8/10/2020","16":"R3","17":"check","18":"check","19":"check","20":"4","21":"13.35000","22":"4922.700","23":"3.082926","24":"47688.412","25":"NA","26":"NA","27":"4922.700","28":"47688.412","29":"13.3500","30":"3.082926","31":"16.47500","32":"high","33":"low","34":"10","35":"5228.688"},{"1":"54","2":"-0.63811712","3":"-3.10104398","4":"7.816167e-03","5":"14","6":"-0.8613590","7":"-0.208301238","8":"Pearson's product-moment correlation","9":"two.sided","10":"2020","11":"Quicksand","12":"Kentucky","13":"Progeny 4291","14":"NA","15":"7/22/2020","16":"R3","17":"Acropolis","18":"MBC+DMI","19":"thiophanate-methyl+tetraconazole","20":"4","21":"11.25000","22":"4151.174","23":"10.466664","24":"194537.424","25":"NA","26":"NA","27":"3503.557","28":"194537.424","29":"28.7750","30":"10.466664","31":"20.82500","32":"high","33":"low","34":"16","35":"4795.766"},{"1":"59","2":"-0.76869986","3":"-3.39927871","4":"9.370457e-03","5":"8","6":"-0.9422723","7":"-0.269519081","8":"Pearson's product-moment correlation","9":"two.sided","10":"2020","11":"Milan","12":"Tennessee","13":"Pioneer 43A42","14":"6/3/2020","15":"8/7/2020","16":"R3","17":"check","18":"check","19":"check","20":"4","21":"12.50000","22":"2568.950","23":"3.132407","24":"51650.846","25":"NA","26":"NA","27":"2568.950","28":"51650.846","29":"12.5000","30":"3.132407","31":"10.75000","32":"low","33":"low","34":"10","35":"3049.787"},{"1":"61","2":"-0.86693528","3":"-6.95745754","4":"3.228311e-06","5":"16","6":"-0.9494992","7":"-0.672091733","8":"Pearson's product-moment correlation","9":"two.sided","10":"2012","11":"Dixon Springs","12":"Illinois","13":"Asgrow 4703","14":"05/24/2012","15":"7/24/2012","16":"R3","17":"check","18":"check","19":"check","20":"4","21":"55.85000","22":"3286.844","23":"47.299877","24":"106192.182","25":"NA","26":"NA","27":"3286.844","28":"106192.182","29":"55.8500","30":"47.299877","31":"46.60000","32":"high","33":"high","34":"18","35":"4734.400"},{"1":"62","2":"-0.76283740","3":"-3.91290309","4":"2.422211e-03","5":"11","6":"-0.9250239","7":"-0.365458955","8":"Pearson's product-moment correlation","9":"two.sided","10":"2013","11":"Dixon Springs","12":"Illinois","13":"Asgrow 4703","14":"5/6/2013","15":"8/14/2013","16":"R3","17":"Approach","18":"QoI","19":"picoxystrobin","20":"4","21":"34.17500","22":"3022.887","23":"77.636752","24":"217697.653","25":"NA","26":"NA","27":"3713.881","28":"217697.653","29":"40.4250","30":"77.636752","31":"32.92500","32":"high","33":"high","34":"13","35":"4346.031"},{"1":"63","2":"0.08661757","3":"0.28836174","4":"7.784310e-01","5":"11","6":"-0.4876404","7":"0.608559369","8":"Pearson's product-moment correlation","9":"two.sided","10":"2014","11":"Dixon Springs","12":"Illinois","13":"Armor 4744","14":"5/27/2014","15":"7/28/2014","16":"R3","17":"Approach","18":"QoI","19":"picoxystrobin","20":"4","21":"38.32500","22":"2548.775","23":"17.333439","24":"377974.857","25":"NA","26":"NA","27":"2214.206","28":"377974.857","29":"37.9250","30":"17.333439","31":"18.32500","32":"high","33":"high","34":"13","35":"3352.412"},{"1":"64","2":"-0.14860170","3":"-0.54180665","4":"5.971162e-01","5":"13","6":"-0.6141161","7":"0.393625122","8":"Pearson's product-moment correlation","9":"two.sided","10":"2021","11":"Ames","12":"Iowa","13":"AG30XF0","14":"05/11/2021","15":"07/27/2021","16":"R3","17":"Acropolis","18":"MBC+DMI","19":"thiophanate-methyl+tetraconazole","20":"4","21":"3.87500","22":"5118.398","23":"6.611635","24":"196093.787","25":"NA","26":"NA","27":"4348.553","28":"196093.787","29":"10.8000","30":"6.611635","31":"10.00000","32":"high","33":"low","34":"15","35":"5207.504"},{"1":"66","2":"-0.13817170","3":"-0.44116884","4":"6.684763e-01","5":"10","6":"-0.6597566","7":"0.473257825","8":"Pearson's product-moment correlation","9":"two.sided","10":"2021","11":"Quicksand","12":"Kentucky","13":"NA","14":"NA","15":"8/12/2021","16":"R3","17":"Aproach Prima","18":"QoI+DMI","19":"picoxystrobin+cyproconazole","20":"4","21":"2.75000","22":"3480.188","23":"4.063106","24":"274745.672","25":"NA","26":"NA","27":"3295.250","28":"274745.672","29":"9.5750","30":"4.063106","31":"7.82500","32":"high","33":"low","34":"12","35":"3866.875"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>The Fisher’s z was used as effect-size because of its better statistical property than the Pearson’s r. We obtain the Fisher’s z and sampling variance of each study with the <code>escalc</code> function of the <code>metafor</code> package that calculates and adds them to the data frame. Note that the effect-size and sampling variance are indicated by <code>yi</code> and <code>vi</code>, the standard notations used in <code>metafor</code> when using the <code>escalc</code> function. Let’s see how the data frame looks like.</p>
+<pre class="r"><code>library(metafor)
+fls_dat4 &lt;- escalc(measure = &quot;ZCOR&quot;, ri = estimate, ni = n2, data = fls_dat3)</code></pre>
+<pre class="r"><code>summary(fls_dat4$yi)</code></pre>
+<pre><code>##     Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
+## -1.74323 -0.99628 -0.75499 -0.69970 -0.25534  0.08684</code></pre>
+<pre class="r"><code>data.frame(fls_dat4)</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["study"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["estimate"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["statistic"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["p.value"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["parameter"],"name":[5],"type":["int"],"align":["right"]},{"label":["conf.low"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["conf.high"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["method"],"name":[8],"type":["chr"],"align":["left"]},{"label":["alternative"],"name":[9],"type":["chr"],"align":["left"]},{"label":["year"],"name":[10],"type":["dbl"],"align":["right"]},{"label":["location"],"name":[11],"type":["chr"],"align":["left"]},{"label":["state"],"name":[12],"type":["chr"],"align":["left"]},{"label":["cultivar"],"name":[13],"type":["chr"],"align":["left"]},{"label":["planting_date"],"name":[14],"type":["chr"],"align":["left"]},{"label":["app_date"],"name":[15],"type":["chr"],"align":["left"]},{"label":["growth_stage"],"name":[16],"type":["chr"],"align":["left"]},{"label":["brand_name"],"name":[17],"type":["chr"],"align":["left"]},{"label":["group"],"name":[18],"type":["chr"],"align":["left"]},{"label":["active_ingred"],"name":[19],"type":["chr"],"align":["left"]},{"label":["n"],"name":[20],"type":["dbl"],"align":["right"]},{"label":["mean_sev"],"name":[21],"type":["dbl"],"align":["right"]},{"label":["mean_yld"],"name":[22],"type":["dbl"],"align":["right"]},{"label":["v_sev"],"name":[23],"type":["dbl"],"align":["right"]},{"label":["v_yld"],"name":[24],"type":["dbl"],"align":["right"]},{"label":["rep"],"name":[25],"type":["dbl"],"align":["right"]},{"label":["rating_disease"],"name":[26],"type":["chr"],"align":["left"]},{"label":["yld_check"],"name":[27],"type":["dbl"],"align":["right"]},{"label":["v_yld_check"],"name":[28],"type":["dbl"],"align":["right"]},{"label":["sev_check"],"name":[29],"type":["dbl"],"align":["right"]},{"label":["v_sev_check"],"name":[30],"type":["dbl"],"align":["right"]},{"label":["difer"],"name":[31],"type":["dbl"],"align":["right"]},{"label":["yield_class"],"name":[32],"type":["chr"],"align":["left"]},{"label":["sev_class"],"name":[33],"type":["chr"],"align":["left"]},{"label":["n2"],"name":[34],"type":["dbl"],"align":["right"]},{"label":["max_yield"],"name":[35],"type":["dbl"],"align":["right"]},{"label":["yi"],"name":[36],"type":["dbl"],"align":["right"]},{"label":["vi"],"name":[37],"type":["dbl"],"align":["right"]}],"data":[{"1":"1","2":"-0.45118163","3":"-1.59873398","4":"1.409633e-01","5":"10","6":"-0.8142471","7":"0.165599234","8":"Pearson's product-moment correlation","9":"two.sided","10":"2015","11":"TVREC","12":"Alabama","13":"NA","14":"NA","15":"NA","16":"R3","17":"Affiance","18":"QoI+DMI","19":"azoxystrobin+tetraconazole","20":"4","21":"29.75000","22":"4912.613","23":"178.980429","24":"39232.887","25":"NA","26":"NA","27":"4747.850","28":"39232.887","29":"45.5000","30":"178.980429","31":"40.50000","32":"high","33":"high","34":"12","35":"5173.206","36":"-0.48618294","37":"0.11111111"},{"1":"2","2":"-0.38579948","3":"-1.18277283","4":"2.708559e-01","5":"8","6":"-0.8169748","7":"0.322057697","8":"Pearson's product-moment correlation","9":"two.sided","10":"2015","11":"NRES","12":"Arkansas","13":"Armor 4744","14":"NA","15":"NA","16":"R3","17":"Affiance","18":"QoI+DMI","19":"azoxystrobin+tetraconazole","20":"4","21":"8.75000","22":"3091.819","23":"4.591540","24":"92661.774","25":"NA","26":"NA","27":"2943.869","28":"92661.774","29":"13.7500","30":"4.591540","31":"8.75000","32":"high","33":"low","34":"10","35":"3607.963","36":"-0.40685552","37":"0.14285714"},{"1":"3","2":"-0.88057671","3":"-7.43253792","4":"1.421075e-06","5":"16","6":"-0.9548810","7":"-0.702525229","8":"Pearson's product-moment correlation","9":"two.sided","10":"2015","11":"Dixon Springs","12":"Illinois","13":"Armor 4744","14":"05/23/2015","15":"07/31/2015","16":"R3","17":"Affiance","18":"QoI+DMI","19":"azoxystrobin+tetraconazole","20":"4","21":"10.75000","22":"3199.419","23":"10.387800","24":"83702.631","25":"NA","26":"NA","27":"2468.075","28":"83702.631","29":"34.7500","30":"10.387800","31":"29.25000","32":"high","33":"high","34":"18","35":"3423.025","36":"-1.37832974","37":"0.06666667"},{"1":"4","2":"-0.57161633","3":"-2.20300209","4":"5.217526e-02","5":"10","6":"-0.8625553","7":"0.003400982","8":"Pearson's product-moment correlation","9":"two.sided","10":"2015","11":"Carbondale","12":"Illinois","13":"AG 4433","14":"5/29/2015","15":"07/21/2015","16":"R3","17":"Affiance","18":"QoI+DMI","19":"azoxystrobin+tetraconazole","20":"4","21":"25.00000","22":"3693.706","23":"53.424874","24":"68591.855","25":"NA","26":"NA","27":"3307.019","28":"68591.855","29":"42.5000","30":"53.424874","31":"31.25000","32":"high","33":"high","34":"12","35":"3947.575","36":"-0.64992033","37":"0.11111111"},{"1":"6","2":"-0.92911885","3":"-7.10675574","4":"1.013150e-04","5":"8","6":"-0.9834369","7":"-0.721664726","8":"Pearson's product-moment correlation","9":"two.sided","10":"2015","11":"Princeton","12":"Kentucky","13":"NA","14":"NA","15":"07/21/2015","16":"R3","17":"Affiance","18":"QoI+DMI","19":"azoxystrobin+tetraconazole","20":"4","21":"26.67500","22":"3644.950","23":"5.971763","24":"60465.943","25":"NA","26":"NA","27":"2580.719","28":"60465.943","29":"50.0000","30":"5.971763","31":"30.85000","32":"high","33":"high","34":"10","35":"3969.431","36":"-1.65190703","37":"0.14285714"},{"1":"7","2":"-0.73791977","3":"-3.28018551","4":"9.526447e-03","5":"9","6":"-0.9273114","7":"-0.247684829","8":"Pearson's product-moment correlation","9":"two.sided","10":"2015","11":"Baton Rouge","12":"Louisiana","13":"NA","14":"NA","15":"NA","16":"R3","17":"Affiance","18":"QoI+DMI","19":"azoxystrobin+tetraconazole","20":"4","21":"37.50000","22":"3127.125","23":"34.886364","24":"71536.385","25":"NA","26":"NA","27":"2690.336","28":"71536.385","29":"82.5000","30":"34.886364","31":"60.00000","32":"high","33":"high","34":"11","35":"3407.894","36":"-0.94589673","37":"0.12500000"},{"1":"8","2":"-0.69257821","3":"-3.03617727","4":"1.254416e-02","5":"10","6":"-0.9062651","7":"-0.196964361","8":"Pearson's product-moment correlation","9":"two.sided","10":"2015","11":"Crowley","12":"Louisiana","13":"NA","14":"NA","15":"NA","16":"R3","17":"Affiance","18":"QoI+DMI","19":"azoxystrobin+tetraconazole","20":"4","21":"35.00000","22":"3615.864","23":"19.696970","24":"32726.316","25":"NA","26":"NA","27":"3293.233","28":"32726.316","29":"86.2500","30":"19.696970","31":"76.25000","32":"high","33":"high","34":"12","35":"4245.661","36":"-0.85289375","37":"0.11111111"},{"1":"9","2":"-0.54710408","3":"-2.06685966","4":"6.562839e-02","5":"10","6":"-0.8531350","7":"0.039062544","8":"Pearson's product-moment correlation","9":"two.sided","10":"2015","11":"Turtleback","12":"Louisiana","13":"NA","14":"NA","15":"NA","16":"R3","17":"Affiance","18":"QoI+DMI","19":"azoxystrobin+tetraconazole","20":"4","21":"2.45000","22":"1474.456","23":"2.498813","24":"31092.503","25":"NA","26":"NA","27":"1452.600","28":"31092.503","29":"8.3000","30":"2.498813","31":"6.55000","32":"low","33":"low","34":"12","35":"1657.713","36":"-0.61423890","37":"0.11111111"},{"1":"10","2":"-0.31862243","3":"-1.06297290","4":"3.127895e-01","5":"10","6":"-0.7545488","7":"0.312404903","8":"Pearson's product-moment correlation","9":"two.sided","10":"2015","11":"NA","12":"Mississippi","13":"DynaGro 37RY47","14":"6/6/2015","15":"07/29/2015","16":"R3","17":"check","18":"check","19":"check","20":"4","21":"52.50000","22":"3244.812","23":"89.898990","24":"67704.245","25":"NA","26":"NA","27":"3244.812","28":"67704.245","29":"52.5000","30":"89.898990","31":"10.00000","32":"high","33":"high","34":"12","35":"3412.938","36":"-0.33011313","37":"0.11111111"},{"1":"11","2":"-0.17862045","3":"-0.57407978","4":"5.785970e-01","5":"10","6":"-0.6825532","7":"0.440429882","8":"Pearson's product-moment correlation","9":"two.sided","10":"2015","11":"Cotton Grove","12":"Tennessee","13":"Armor 4744","14":"06/07/2015","15":"08/11/2015","16":"R3","17":"Affiance","18":"QoI+DMI","19":"azoxystrobin+tetraconazole","20":"4","21":"2.75000","22":"4119.062","23":"6.949192","24":"91781.523","25":"NA","26":"NA","27":"4038.363","28":"91781.523","29":"7.7500","30":"6.949192","31":"7.00000","32":"high","33":"low","34":"12","35":"4472.125","36":"-0.18055731","37":"0.11111111"},{"1":"12","2":"-0.93342049","3":"-8.22704531","4":"9.207491e-06","5":"10","6":"-0.9815266","7":"-0.774310401","8":"Pearson's product-moment correlation","9":"two.sided","10":"2015","11":"Milan","12":"Tennessee","13":"NA","14":"6/5/2015","15":"8/7/2015","16":"R3","17":"Affiance","18":"QoI+DMI","19":"azoxystrobin+tetraconazole","20":"4","21":"14.17500","22":"3147.300","23":"45.864703","24":"87494.453","25":"NA","26":"NA","27":"2573.994","28":"87494.453","29":"44.2500","30":"45.864703","31":"37.82500","32":"high","33":"high","34":"12","35":"3557.525","36":"-1.68432459","37":"0.11111111"},{"1":"13","2":"-0.63172136","3":"-2.44475619","4":"3.707426e-02","5":"9","6":"-0.8931382","7":"-0.051278555","8":"Pearson's product-moment correlation","9":"two.sided","10":"2016","11":"TVREC","12":"Alabama","13":"Asgrow 5233 RR","14":"06/20/2016","15":"08/19/2016","16":"R3","17":"Affiance","18":"QoI+DMI","19":"azoxystrobin+tetraconazole","20":"5","21":"3.26000","22":"1708.150","23":"1.606347","24":"19849.856","25":"NA","26":"NA","27":"1464.705","28":"19849.856","29":"11.8600","30":"1.606347","31":"9.02000","32":"low","33":"low","34":"11","35":"1757.915","36":"-0.74427548","37":"0.12500000"},{"1":"14","2":"-0.69664076","3":"-3.07068535","4":"1.182699e-02","5":"10","6":"-0.9076578","7":"-0.204498179","8":"Pearson's product-moment correlation","9":"two.sided","10":"2016","11":"NRES","12":"Arkansas","13":"NA","14":"NA","15":"NA","16":"R3","17":"Affiance","18":"QoI+DMI","19":"azoxystrobin+tetraconazole","20":"4","21":"9.00000","22":"3446.562","23":"1.767677","24":"66813.780","25":"NA","26":"NA","27":"3048.106","28":"66813.780","29":"11.7500","30":"1.767677","31":"7.25000","32":"high","33":"low","34":"12","35":"3698.750","36":"-0.86074392","37":"0.11111111"},{"1":"15","2":"-0.79236958","3":"-4.10741441","4":"2.119295e-03","5":"10","6":"-0.9391844","7":"-0.400669110","8":"Pearson's product-moment correlation","9":"two.sided","10":"2016","11":"Shawneetown","12":"Illinois","13":"S39-U2","14":"6/13/2016","15":"7/27/2016","16":"R3","17":"Affiance","18":"QoI+DMI","19":"azoxystrobin+tetraconazole","20":"6","21":"68.33333","22":"2914.167","23":"22.601010","24":"40919.814","25":"NA","26":"NA","27":"2574.554","28":"40919.814","29":"75.0000","30":"22.601010","31":"16.66667","32":"high","33":"high","34":"12","35":"3383.796","36":"-1.07776707","37":"0.11111111"},{"1":"16","2":"-0.72868917","3":"-3.36473054","4":"7.184870e-03","5":"10","6":"-0.9184844","7":"-0.266047535","8":"Pearson's product-moment correlation","9":"two.sided","10":"2016","11":"Ames","12":"Iowa","13":"2616R2Y","14":"05/22/16","15":"7/26/2016","16":"R3","17":"Affiance","18":"QoI+DMI","19":"azoxystrobin+tetraconazole","20":"4","21":"3.85000","22":"4699.094","23":"67.203037","24":"70938.477","25":"NA","26":"NA","27":"4260.288","28":"70938.477","29":"34.5750","30":"67.203037","31":"31.62500","32":"high","33":"high","34":"12","35":"4924.381","36":"-0.92592677","37":"0.11111111"},{"1":"17","2":"-0.79469292","3":"-3.92756664","4":"3.470844e-03","5":"9","6":"-0.9443708","7":"-0.372298917","8":"Pearson's product-moment correlation","9":"two.sided","10":"2016","11":"Princeton","12":"Kentucky","13":"NA","14":"NA","15":"7/26/2016","16":"R3","17":"Affiance","18":"QoI+DMI","19":"azoxystrobin+tetraconazole","20":"4","21":"25.42500","22":"4519.200","23":"9.755404","24":"116180.740","25":"NA","26":"NA","27":"3579.381","28":"116180.740","29":"39.6000","30":"9.755404","31":"25.02500","32":"high","33":"high","34":"11","35":"4645.294","36":"-1.08404120","37":"0.12500000"},{"1":"19","2":"-0.72045832","3":"-3.28521270","4":"8.216229e-03","5":"10","6":"-0.9157307","7":"-0.249871699","8":"Pearson's product-moment correlation","9":"two.sided","10":"2016","11":"Winnsboro","12":"Louisiana","13":"NA","14":"NA","15":"NA","16":"R3","17":"Affiance","18":"QoI+DMI","19":"azoxystrobin+tetraconazole","20":"4","21":"4.02500","22":"3337.281","23":"3.056566","24":"97942.058","25":"NA","26":"NA","27":"2918.650","28":"97942.058","29":"6.6500","30":"3.056566","31":"7.27500","32":"high","33":"low","34":"12","35":"3626.456","36":"-0.90859729","37":"0.11111111"},{"1":"20","2":"-0.02933085","3":"-0.09732130","4":"9.242219e-01","5":"11","6":"-0.5710869","7":"0.530223320","8":"Pearson's product-moment correlation","9":"two.sided","10":"2016","11":"NA","12":"Mississippi","13":"NA","14":"NA","15":"NA","16":"R3","17":"Affiance","18":"QoI+DMI","19":"azoxystrobin+tetraconazole","20":"4","21":"50.00000","22":"4300.637","23":"98.106061","24":"358464.361","25":"NA","26":"NA","27":"4090.481","28":"358464.361","29":"60.0000","30":"98.106061","31":"32.50000","32":"high","33":"high","34":"13","35":"5309.387","36":"-0.02933927","37":"0.10000000"},{"1":"21","2":"-0.75718736","3":"-4.17955798","4":"1.079948e-03","5":"13","6":"-0.9146693","7":"-0.400124321","8":"Pearson's product-moment correlation","9":"two.sided","10":"2016","11":"Cotton Grove","12":"Tennessee","13":"NA","14":"NA","15":"NA","16":"R3","17":"Affiance","18":"QoI+DMI","19":"azoxystrobin+tetraconazole","20":"4","21":"9.75000","22":"3451.606","23":"18.977242","24":"27252.679","25":"NA","26":"NA","27":"3093.500","28":"27252.679","29":"14.2500","30":"18.977242","31":"7.75000","32":"high","33":"low","34":"15","35":"3651.675","36":"-0.98958981","37":"0.08333333"},{"1":"22","2":"0.02084044","3":"0.07515759","4":"9.412336e-01","5":"13","6":"-0.4967253","7":"0.527472105","8":"Pearson's product-moment correlation","9":"two.sided","10":"2016","11":"Milan","12":"Tennessee","13":"NA","14":"NA","15":"NA","16":"R3","17":"Affiance","18":"QoI+DMI","19":"azoxystrobin+tetraconazole","20":"4","21":"3.25000","22":"2004.050","23":"1.887568","24":"93991.707","25":"NA","26":"NA","27":"2279.775","28":"93991.707","29":"8.0000","30":"1.887568","31":"5.75000","32":"low","33":"low","34":"15","35":"2382.331","36":"0.02084346","37":"0.08333333"},{"1":"24","2":"-0.94059997","3":"-11.75384210","4":"7.040205e-10","5":"18","6":"-0.9766181","7":"-0.853218694","8":"Pearson's product-moment correlation","9":"two.sided","10":"2017","11":"Princeton","12":"Kentucky","13":"NA","14":"NA","15":"7/22/2017","16":"R3","17":"Acropolis","18":"MBC+DMI","19":"thiophanate-methyl+tetraconazole","20":"4","21":"15.42500","22":"2389.056","23":"11.570316","24":"47898.073","25":"NA","26":"NA","27":"1667.800","28":"47898.073","29":"45.0000","30":"11.570316","31":"33.75000","32":"low","33":"high","34":"20","35":"2706.812","36":"-1.74322883","37":"0.05882353"},{"1":"25","2":"-0.75571136","3":"-4.89569103","4":"1.164154e-04","5":"18","6":"-0.8979436","7":"-0.470551433","8":"Pearson's product-moment correlation","9":"two.sided","10":"2017","11":"Quicksand","12":"Kentucky","13":"Armor 4744","14":"NA","15":"8/9/2017","16":"R3","17":"Acropolis","18":"MBC+DMI","19":"thiophanate-methyl+tetraconazole","20":"4","21":"16.25000","22":"2859.806","23":"8.585219","24":"142575.449","25":"NA","26":"NA","27":"2548.775","28":"142575.449","29":"43.3250","30":"8.585219","31":"34.07500","32":"low","33":"high","34":"20","35":"3014.481","36":"-0.98613944","37":"0.05882353"},{"1":"29","2":"-0.77747926","3":"-4.62557063","4":"3.928898e-04","5":"14","6":"-0.9190010","7":"-0.458467647","8":"Pearson's product-moment correlation","9":"two.sided","10":"2018","11":"Princeton","12":"Kentucky","13":"Armor 4744","14":"06/06/2018","15":"08/02/2018","16":"R3","17":"Acropolis","18":"MBC+DMI","19":"thiophanate-methyl+tetraconazole","20":"4","21":"26.25000","22":"2807.688","23":"8.334637","24":"322563.152","25":"NA","26":"NA","27":"1837.606","28":"322563.152","29":"50.0000","30":"8.334637","31":"34.17500","32":"high","33":"high","34":"16","35":"3769.363","36":"-1.03896560","37":"0.07692308"},{"1":"30","2":"-0.66007717","3":"-3.16819632","4":"7.407536e-03","5":"13","6":"-0.8761013","7":"-0.223329355","8":"Pearson's product-moment correlation","9":"two.sided","10":"2018","11":"Quicksand","12":"Kentucky","13":"Armor 4744","14":"NA","15":"07/08/2018","16":"R3","17":"Acropolis","18":"MBC+DMI","19":"thiophanate-methyl+tetraconazole","20":"4","21":"13.35000","22":"2170.494","23":"4.356005","24":"117030.009","25":"NA","26":"NA","27":"1731.688","28":"117030.009","29":"34.5750","30":"4.356005","31":"21.65000","32":"low","33":"high","34":"15","35":"2341.981","36":"-0.79295038","37":"0.08333333"},{"1":"32","2":"-0.45173145","3":"-2.08768503","4":"5.218787e-02","5":"17","6":"-0.7517054","7":"0.003117485","8":"Pearson's product-moment correlation","9":"two.sided","10":"2019","11":"DLSB1902","12":"Louisiana","13":"AsGrow 4934","14":"5/28/2019","15":"7/26/2019","16":"R3","17":"Acropolis","18":"MBC+DMI","19":"thiophanate-methyl+tetraconazole","20":"4","21":"45.00000","22":"4063.581","23":"90.820975","24":"72255.218","25":"NA","26":"NA","27":"3981.200","28":"72255.218","29":"63.7500","30":"90.820975","31":"33.75000","32":"high","33":"high","34":"19","35":"4224.981","36":"-0.48687350","37":"0.06250000"},{"1":"33","2":"-0.11706408","3":"-0.48600917","4":"6.331660e-01","5":"17","6":"-0.5424314","7":"0.356078468","8":"Pearson's product-moment correlation","9":"two.sided","10":"2019","11":"NESB1902","12":"Louisiana","13":"AsGrow 4934","14":"5/29/2019","15":"7/24/2019","16":"R3","17":"Acropolis","18":"MBC+DMI","19":"thiophanate-methyl+tetraconazole","20":"4","21":"12.50000","22":"2395.781","23":"43.324182","24":"356392.135","25":"NA","26":"NA","27":"2629.475","28":"356392.135","29":"28.7500","30":"43.324182","31":"22.50000","32":"low","33":"low","34":"19","35":"3338.963","36":"-0.11760327","37":"0.06250000"},{"1":"35","2":"-0.70802055","3":"-3.47307204","4":"4.604803e-03","5":"12","6":"-0.9003671","7":"-0.284206331","8":"Pearson's product-moment correlation","9":"two.sided","10":"2017","11":"Stoneville","12":"Mississippi","13":"NA","14":"NA","15":"NA","16":"R3","17":"Acropolis","18":"MBC+DMI","19":"thiophanate-methyl+tetraconazole","20":"4","21":"25.00000","22":"3374.773","23":"50.869963","24":"18475.187","25":"NA","26":"NA","27":"2923.862","28":"18475.187","29":"50.0000","30":"50.869963","31":"25.00000","32":"high","33":"high","34":"14","35":"3592.159","36":"-0.88320348","37":"0.09090909"},{"1":"37","2":"0.08641113","3":"0.31272949","4":"7.594464e-01","5":"13","6":"-0.4455752","7":"0.573296864","8":"Pearson's product-moment correlation","9":"two.sided","10":"2019","11":"TVREC","12":"Alabama","13":"AG 52X9","14":"06/14/2019","15":"NA","16":"R3","17":"Acropolis","18":"MBC+DMI","19":"thiophanate-methyl+tetraconazole","20":"4","21":"7.72500","22":"1281.112","23":"4.550014","24":"7725.378","25":"NA","26":"NA","27":"1175.194","28":"7725.378","29":"3.1325","30":"4.550014","31":"5.36750","32":"low","33":"low","34":"15","35":"1383.669","36":"0.08662717","37":"0.08333333"},{"1":"39","2":"-0.43561175","3":"-2.05318631","4":"5.488019e-02","5":"18","6":"-0.7362145","7":"0.008558905","8":"Pearson's product-moment correlation","9":"two.sided","10":"2019","11":"Ames","12":"Iowa","13":"AG2733","14":"06/03/2019","15":"08/07/2019","16":"R3","17":"Acropolis","18":"MBC+DMI","19":"thiophanate-methyl+tetraconazole","20":"4","21":"0.75000","22":"4858.812","23":"10.481091","24":"73026.372","25":"NA","26":"NA","27":"4527.606","28":"73026.372","29":"19.8750","30":"10.481091","31":"19.65000","32":"high","33":"low","34":"20","35":"5242.137","36":"-0.46680198","37":"0.05882353"},{"1":"40","2":"-0.15609485","3":"-0.65158260","4":"5.233823e-01","5":"17","6":"-0.5698985","7":"0.320863579","8":"Pearson's product-moment correlation","9":"two.sided","10":"2019","11":"Quicksand","12":"Kentucky","13":"NK S48-R2X","14":"05/18/2019","15":"7/16/2019","16":"R3","17":"Acropolis","18":"MBC+DMI","19":"thiophanate-methyl+tetraconazole","20":"4","21":"6.50000","22":"3660.754","23":"1.893264","24":"202192.746","25":"NA","26":"NA","27":"3574.338","28":"202192.746","29":"13.1500","30":"1.893264","31":"8.41500","32":"high","33":"low","34":"19","35":"4420.174","36":"-0.15738149","37":"0.06250000"},{"1":"41","2":"-0.15287789","3":"-0.63782932","4":"5.320828e-01","5":"17","6":"-0.5676691","7":"0.323816764","8":"Pearson's product-moment correlation","9":"two.sided","10":"2019","11":"Union County","12":"Kentucky","13":"NA","14":"NA","15":"8/14/2019","16":"R3","17":"Acropolis","18":"MBC+DMI","19":"thiophanate-methyl+tetraconazole","20":"4","21":"7.25000","22":"3052.309","23":"1.793541","24":"478196.029","25":"NA","26":"NA","27":"2713.537","28":"478196.029","29":"15.0000","30":"1.793541","31":"11.66500","32":"low","33":"low","34":"19","35":"3279.446","36":"-0.15408588","37":"0.06250000"},{"1":"52","2":"-0.43775300","3":"-1.37710930","4":"2.057795e-01","5":"8","6":"-0.8367528","7":"0.264879637","8":"Pearson's product-moment correlation","9":"two.sided","10":"2020","11":"Union County","12":"Kentucky","13":"NA","14":"NA","15":"8/10/2020","16":"R3","17":"check","18":"check","19":"check","20":"4","21":"13.35000","22":"4922.700","23":"3.082926","24":"47688.412","25":"NA","26":"NA","27":"4922.700","28":"47688.412","29":"13.3500","30":"3.082926","31":"16.47500","32":"high","33":"low","34":"10","35":"5228.688","36":"-0.46944775","37":"0.14285714"},{"1":"54","2":"-0.63811712","3":"-3.10104398","4":"7.816167e-03","5":"14","6":"-0.8613590","7":"-0.208301238","8":"Pearson's product-moment correlation","9":"two.sided","10":"2020","11":"Quicksand","12":"Kentucky","13":"Progeny 4291","14":"NA","15":"7/22/2020","16":"R3","17":"Acropolis","18":"MBC+DMI","19":"thiophanate-methyl+tetraconazole","20":"4","21":"11.25000","22":"4151.174","23":"10.466664","24":"194537.424","25":"NA","26":"NA","27":"3503.557","28":"194537.424","29":"28.7750","30":"10.466664","31":"20.82500","32":"high","33":"low","34":"16","35":"4795.766","36":"-0.75499108","37":"0.07692308"},{"1":"59","2":"-0.76869986","3":"-3.39927871","4":"9.370457e-03","5":"8","6":"-0.9422723","7":"-0.269519081","8":"Pearson's product-moment correlation","9":"two.sided","10":"2020","11":"Milan","12":"Tennessee","13":"Pioneer 43A42","14":"6/3/2020","15":"8/7/2020","16":"R3","17":"check","18":"check","19":"check","20":"4","21":"12.50000","22":"2568.950","23":"3.132407","24":"51650.846","25":"NA","26":"NA","27":"2568.950","28":"51650.846","29":"12.5000","30":"3.132407","31":"10.75000","32":"low","33":"low","34":"10","35":"3049.787","36":"-1.01714192","37":"0.14285714"},{"1":"61","2":"-0.86693528","3":"-6.95745754","4":"3.228311e-06","5":"16","6":"-0.9494992","7":"-0.672091733","8":"Pearson's product-moment correlation","9":"two.sided","10":"2012","11":"Dixon Springs","12":"Illinois","13":"Asgrow 4703","14":"05/24/2012","15":"7/24/2012","16":"R3","17":"check","18":"check","19":"check","20":"4","21":"55.85000","22":"3286.844","23":"47.299877","24":"106192.182","25":"NA","26":"NA","27":"3286.844","28":"106192.182","29":"55.8500","30":"47.299877","31":"46.60000","32":"high","33":"high","34":"18","35":"4734.400","36":"-1.32060891","37":"0.06666667"},{"1":"62","2":"-0.76283740","3":"-3.91290309","4":"2.422211e-03","5":"11","6":"-0.9250239","7":"-0.365458955","8":"Pearson's product-moment correlation","9":"two.sided","10":"2013","11":"Dixon Springs","12":"Illinois","13":"Asgrow 4703","14":"5/6/2013","15":"8/14/2013","16":"R3","17":"Approach","18":"QoI","19":"picoxystrobin","20":"4","21":"34.17500","22":"3022.887","23":"77.636752","24":"217697.653","25":"NA","26":"NA","27":"3713.881","28":"217697.653","29":"40.4250","30":"77.636752","31":"32.92500","32":"high","33":"high","34":"13","35":"4346.031","36":"-1.00296699","37":"0.10000000"},{"1":"63","2":"0.08661757","3":"0.28836174","4":"7.784310e-01","5":"11","6":"-0.4876404","7":"0.608559369","8":"Pearson's product-moment correlation","9":"two.sided","10":"2014","11":"Dixon Springs","12":"Illinois","13":"Armor 4744","14":"5/27/2014","15":"7/28/2014","16":"R3","17":"Approach","18":"QoI","19":"picoxystrobin","20":"4","21":"38.32500","22":"2548.775","23":"17.333439","24":"377974.857","25":"NA","26":"NA","27":"2214.206","28":"377974.857","29":"37.9250","30":"17.333439","31":"18.32500","32":"high","33":"high","34":"13","35":"3352.412","36":"0.08683517","37":"0.10000000"},{"1":"64","2":"-0.14860170","3":"-0.54180665","4":"5.971162e-01","5":"13","6":"-0.6141161","7":"0.393625122","8":"Pearson's product-moment correlation","9":"two.sided","10":"2021","11":"Ames","12":"Iowa","13":"AG30XF0","14":"05/11/2021","15":"07/27/2021","16":"R3","17":"Acropolis","18":"MBC+DMI","19":"thiophanate-methyl+tetraconazole","20":"4","21":"3.87500","22":"5118.398","23":"6.611635","24":"196093.787","25":"NA","26":"NA","27":"4348.553","28":"196093.787","29":"10.8000","30":"6.611635","31":"10.00000","32":"high","33":"low","34":"15","35":"5207.504","36":"-0.14971025","37":"0.08333333"},{"1":"66","2":"-0.13817170","3":"-0.44116884","4":"6.684763e-01","5":"10","6":"-0.6597566","7":"0.473257825","8":"Pearson's product-moment correlation","9":"two.sided","10":"2021","11":"Quicksand","12":"Kentucky","13":"NA","14":"NA","15":"8/12/2021","16":"R3","17":"Aproach Prima","18":"QoI+DMI","19":"picoxystrobin+cyproconazole","20":"4","21":"2.75000","22":"3480.188","23":"4.063106","24":"274745.672","25":"NA","26":"NA","27":"3295.250","28":"274745.672","29":"9.5750","30":"4.063106","31":"7.82500","32":"high","33":"low","34":"12","35":"3866.875","36":"-0.13906121","37":"0.11111111"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<pre class="r"><code>hist_fisher &lt;- ggplot(fls_dat4, aes(yi)) + 
+  geom_histogram(bin = 0.1, binwidth = 0.2, color = &quot;black&quot; , fill = &quot;black&quot;,
+                 alpha = 0.1) + 
+  theme_half_open()+
+  theme(axis.title = element_text(size=12),
+        axis.text = element_text(size=12))+
+  labs(x = expression(&quot;Fisher&#39;s transformation of&quot;~ italic(&quot;r&quot;)~ &quot;(&quot;~italic(&quot;Z&quot; [r])~&quot;)&quot;), 
+                      y = &quot;Frequency&quot;)</code></pre>
+<pre><code>## Warning: Ignoring unknown parameters: bin</code></pre>
+<pre class="r"><code>hist_fisher</code></pre>
+<p><img src="code_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
+<pre class="r"><code>library(patchwork)
+(hist_pears + hist_fisher) +
+  plot_layout(nrow = 1)+
+  plot_annotation(tag_levels = &quot;A&quot;)</code></pre>
+<p><img src="code_files/figure-html/unnamed-chunk-25-2.png" width="672" /></p>
+<pre class="r"><code>ggsave(&quot;Figures/Corr_coeff.png&quot;, height=3, width=8, dpi = 600, bg = &quot;white&quot;)</code></pre>
+</div>
+<div id="overall-fishers-z" class="section level2">
+<h2>Overall Fisher’s z</h2>
+<p>A <a href="http://www.metafor-project.org/doku.php/tips:rma.uni_vs_rma.mv">random-effects</a> meta-analytic model was fitted to these data using a maximum likelihood estimator for the amount of heterogeneity.</p>
+<pre class="r"><code>fls_cor_yld &lt;- rma.uni(yi, vi, method = &quot;ML&quot;, data = fls_dat4)
+summary(fls_cor_yld)</code></pre>
+<pre><code>## 
+## Random-Effects Model (k = 39; tau^2 estimator: ML)
+## 
+##   logLik  deviance       AIC       BIC      AICc 
+## -27.8417   76.2611   59.6835   63.0106   60.0168   
+## 
+## tau^2 (estimated amount of total heterogeneity): 0.1556 (SE = 0.0564)
+## tau (square root of estimated tau^2 value):      0.3944
+## I^2 (total heterogeneity / total variability):   63.23%
+## H^2 (total variability / sampling variability):  2.72
+## 
+## Test for Heterogeneity:
+## Q(df = 38) = 109.0113, p-val &lt; .0001
+## 
+## Model Results:
+## 
+## estimate      se     zval    pval    ci.lb    ci.ub 
+##  -0.6954  0.0801  -8.6793  &lt;.0001  -0.8525  -0.5384  *** 
+## 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>Back-transform z to obtain overall mean r.</p>
+<pre class="r"><code>pred_fls &lt;- predict(fls_cor_yld, transf = transf.ztor)
+pred_fls</code></pre>
+<pre><code>## 
+##     pred   ci.lb   ci.ub   cr.lb  cr.ub 
+##  -0.6015 -0.6924 -0.4918 -0.9023 0.0931</code></pre>
+</div>
+<div id="effect-of-moderators" class="section level2">
+<h2>Effect of moderators</h2>
+<p>The random-effects model fitted previously assumes that the heterogeneity in the true correlation coefficients (Fisher’s z) is purely random. However, there may be differences among the individual effects that are (at least in part) related to study-specific variables. These variable can be treated as “moderators” in the model. We considered here: disease and yield levels.</p>
+<p>The mixed-effect models test one moderator variable, each at a time, as a fixed effects. The goal was to examine the extent that the moderators included in the model influence the size of the average true effect. The heterogeneity among the true effect-sizes is evaluated based on significance of the Cochran Q test and the <em>I</em><sup>2</sup> index that measures the extent of heterogeneity of the true effect-sizes.</p>
+<div id="disease-pressure" class="section level3">
+<h3>disease pressure</h3>
+<pre class="r"><code>fls_cor_yld_sev2 &lt;- rma.uni(yi, vi, mods = ~sev_class, method = &quot;ML&quot;, data = fls_dat4)
+fls_cor_yld_sev2</code></pre>
+<pre><code>## 
+## Mixed-Effects Model (k = 39; tau^2 estimator: ML)
+## 
+## tau^2 (estimated amount of residual heterogeneity):     0.0901 (SE = 0.0412)
+## tau (square root of estimated tau^2 value):             0.3001
+## I^2 (residual heterogeneity / unaccounted variability): 49.83%
+## H^2 (unaccounted variability / sampling variability):   1.99
+## R^2 (amount of heterogeneity accounted for):            42.11%
+## 
+## Test for Residual Heterogeneity:
+## QE(df = 37) = 77.6753, p-val = 0.0001
+## 
+## Test of Moderators (coefficient 2):
+## QM(df = 1) = 13.3100, p-val = 0.0003
+## 
+## Model Results:
+## 
+##               estimate      se     zval    pval    ci.lb    ci.ub 
+## intrcpt        -0.9263  0.0936  -9.8991  &lt;.0001  -1.1097  -0.7429  *** 
+## sev_classlow    0.5026  0.1378   3.6483  0.0003   0.2326   0.7726  *** 
+## 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+</div>
+<div id="yield-class-1" class="section level3">
+<h3>yield class</h3>
+<pre class="r"><code>fls_cor_yld_yld2 &lt;- rma.uni(yi, vi, mods = ~ yield_class, method = &quot;ML&quot;, data = fls_dat4)
+fls_cor_yld_yld2</code></pre>
+<pre><code>## 
+## Mixed-Effects Model (k = 39; tau^2 estimator: ML)
+## 
+## tau^2 (estimated amount of residual heterogeneity):     0.1528 (SE = 0.0558)
+## tau (square root of estimated tau^2 value):             0.3909
+## I^2 (residual heterogeneity / unaccounted variability): 62.70%
+## H^2 (unaccounted variability / sampling variability):   2.68
+## R^2 (amount of heterogeneity accounted for):            1.77%
+## 
+## Test for Residual Heterogeneity:
+## QE(df = 37) = 107.9545, p-val &lt; .0001
+## 
+## Test of Moderators (coefficient 2):
+## QM(df = 1) = 0.4792, p-val = 0.4888
+## 
+## Model Results:
+## 
+##                 estimate      se     zval    pval    ci.lb    ci.ub 
+## intrcpt          -0.7288  0.0931  -7.8254  &lt;.0001  -0.9113  -0.5463  *** 
+## yield_classlow    0.1245  0.1799   0.6923  0.4888  -0.2281   0.4771      
+## 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+</div>
+</div>
+</div>
+
+
+
+Copyright 2017 Emerson Del Ponte
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = false;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
